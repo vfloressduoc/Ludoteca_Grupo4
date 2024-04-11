@@ -1,0 +1,101 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña</title>
+
+    <!-- *** LIBRERIA DE ESTILOS (6.4.0 RECOMENDADA EN VIDEO DE CLASE *** -->
+    <link rel="stylesheet" href="{% static '/css/formularios-style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <div class="container"> 
+
+        <div class="form-content">
+
+            <h1 id="title">¿Olvidaste tu contraseña?</h1>
+            
+            <!-- *** FORMULARIO *** -->
+
+            <form id="formulario_recuperarpass" action="">
+
+                <div class="input-group">
+                
+                    <!-- *** LAS OPCIONES *** -->
+
+                    <!--CORREO-->
+                    <p>Te enviaremos las instrucciones de cómo reestablecer tu constraseña a tu dirección de 
+                        correo electrónico.
+                    </p>
+                    <div class="input-field"> 
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Ingrese correo electronico" name="Correo" id="usuarioCorreoInput" pattern=".+@+\..+"> 
+                        <small class='text-danger' id='usuarioCorreoInput-error'></small>
+                    </div>
+                    <!-- <p>Olvidaste tu contraseña?<a href="#">click aqui</a> </p> --> <!-- Mensaje de olvidaste tu contraseña, recurso inutilizado por ahora -->
+
+                </div>       
+                
+                <!-- *** BOTONES *** -->
+                <div class="btn-field">
+                    <a href="{%  url 'home' %}" class="button">Volver</a>
+                    <!--BOTON PARA ENVIAR-->
+
+                    <button id="enviarDato" type="submit" >Enviar</button> <!-- submit es para que el boton responda-->
+                </div>
+     
+
+                </div>
+            
+            </form>
+        </div>
+    </div>
+
+    
+
+    <!-- *** SCRIPT QUE PERMITE QUE EL FORMULARIO ATRAPE LOS DATOS *** -->
+    
+    <script src="{% static '/js/01-jq-3.7.1.min.js' %}"></script><!-- Esto llama a la libreria jqwery que usamos, hasta el momento para la restriccion de campos -->
+
+    <script>
+        $(document).ready(function(){
+            $('#formulario_registro').submit(function(event){
+                event.preventDefault(); 
+
+                //Limpia las alertas cuandos se escribe el dato despues de haber arrojado error
+                $('#usuarioInicioInput-error').text('');
+
+                $('#claveInicioInput-error').text('');
+
+
+                //valida los datos y envia las alertas en el cuadro de texto del dato que falta
+
+        
+                if($('#usuarioInput').val() === ''){
+                    $('#usuarioInput-error').text('Por favor, ingresa un nombre de usuario');
+                    return;
+                }
+        
+                if($('#claveInput').val() === ''){
+                    $('#claveInput-error').text('Por favor, ingresa una clave de ingreso');
+                    return;
+                }
+        
+                this.submit();
+            });
+        })
+        
+        
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>

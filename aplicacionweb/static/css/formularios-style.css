@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif; 
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/*BODY ES PARA EL CUERPO (EL FONDO DE TODO)*/
+body{
+    background: #1b1b1b; /* es el color de fondo del cuerpo */
+}
+
+/*CONTAINER ES PARA EL CONTENEDOR (LO QUE ES FORMULARIO Y NO FONDO)*/    
+.container {
+    width: 100%; /* es el ancho del contenedor que ocupa el 100% de la pantalla */
+    /*height: 100vh;*/  /*es el alto del contenedor que ocupa el 100% de la pantalla, ERROR: DEJA LA WEB EN BLANCO */
+    background-color: rgb(141, 217, 255); /* es el color de fondo del contenedor */
+    display: flex; /* es para que los elementos hijos se muestren en línea */
+    align-items: center; /* es para que los elementos hijos se muestren en el centro vertical */
+    justify-content: center; /* es para que los elementos hijos se muestren en el centro */
+}
+
+
+/*FORM ES PARA EL FORMULARIO*/
+.form-content {
+    width: 100%; /* es el ancho del formulario que ocupa el 100% del contenedor */
+    max-width: 450px; /* es el ancho máximo del formulario */
+    background-color: rgb(145, 200, 249); /* es el color de fondo del formulario */
+    padding: 50px 60px 70px; /* es el espacio interior del formulario */
+    text-align: center; /* es para que el texto del formulario se muestre en el centro */
+    border-radius: 25px; /* es el radio de las esquinas del formulario */
+    position: relative;
+}   
+
+
+/*FORM-CONTENT H1 ES PARA EL TÍTULO DEL FORMULARIO*/
+.form-content h1{
+    font-size: 30px; /* es el tamaño del texto */
+    margin-bottom: 60px; /* es el espacio entre el texto y el borde inferior del formulario */
+    color: #FFFFFF; /* es el color del texto */
+    }
+
+/*FORM-CONTENT ES PARA EL CONTENIDO DEL FORMULARIO*/
+.form-content h1::after{
+    content: ''; /* es para que el contenido sea un string vacío */
+    width: 30px; /* es el ancho de la línea */
+    height: 4px; /* es el alto de la línea */
+    border-radius: 3px; /* es el radio de las esquinas del borde */
+    background: yellow; /* es el color de fondo de la línea */
+    position: absolute; /* es para que la línea se muestre en la posición absoluta */
+    bottom: -12px; /* es la distancia entre la línea y el texto */
+    left: 50%; /* es la distancia entre la línea y el borde izquierdo */
+    transform: translate(-50%); /* es para que la línea se muestre en el centro */
+}
+
+/*INPUT-FIELD ES PARA EL CAMPO DE TEXTO: HACE CAMBIOS EN TODO LO QUE SE LLAME INPUT*/
+.input-field {
+    background-color: #515966;
+    margin: 15px 0; /* es el espacio entre los elementos del formulario */
+    border-radius: 3px; /* es el radio de las esquinas del borde */
+    display:flex; /* es para que los elementos hijos se muestren en línea */
+    align-items: center; /* es para que los elementos hijos se muestren en el centro vertical */
+    transition: max-height 0.5s; /* es la duración de la transición */
+    overflow: hidden; /* es para que el contenido que se desborda del contenedor se oculte */
+}
+
+/*INPUT ES PARA EL CAMPO DE TEXTO*/
+input{
+    width: 100%; /* es el ancho del campo de texto que ocupa el 100% del contenedor */
+    background: transparent; /* es el color de fondo del campo de texto */
+    border: 0; /* es el borde del campo de texto */
+    outline: none; /* es para que el campo de texto no tenga un borde al hacer clic */
+    padding: 18px 15px; /* es el espacio interior del campo de texto */
+    color: #FFFFFF; /* es el color del texto del campo de texto */
+}
+
+/*INPUT::PLACEHOLDER ES PARA EL TEXTO DEL CAMPO DE TEXTO*/
+input::placeholder{
+    color: #FFFFFF; /* es el color del texto del campo de texto */
+}
+
+/*INPUT-FIELD I ES PARA EL ICONO DEL CAMPO DE TEXTO*/
+.input-field i{
+    margin-left: 15px; /* es el espacio entre el icono y el borde izquierdo del campo de texto */
+    color: yellow; /* es el color del icono */
+    font-size: 13px; /* es el tamaño del icono */
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column; /* Alinea los campos de entrada en una columna */
+    align-items: center;
+}
+
+/*FORM P ES PARA EL TEXTO DEL FORMULARIO*/
+form p{
+    color: #FFFFFF; /* es el color del texto */
+    margin-left: 40px; /* es el espacio entre el texto y el borde izquierdo del formulario */
+}
+
+/*BTN-FIELD ES PARA EL BOTÓN*/
+.btn-field{
+    width:100%; /* es el ancho del botón que ocupa el 100% del contenedor */
+    display: flex; /* es para que los elementos hijos se muestren en línea */
+    justify-content: space-between; /* es para que los elementos hijos se muestren en el espacio entre ellos */
+    align-items: flex-end;
+}
+
+/*BTN-FIELD BUTTON ES PARA EL BOTÓN, PERO NO SE MUESTRA HASTA QUE SE HAGA CLIC EN EL CAMPO DE TEXTO*/
+.btn-field button{
+    flex-basis: 48%; /* es el tamaño del botón */
+    font-size: 16px; /* es el tamaño del texto del botón */
+    background-color: yellow; /* es el color de fondo del botón */
+    color: #ffffff; /* es el color del texto del botón */
+    height: 40px; /* es el alto del botón */
+    border-radius: 10px; /* es el radio de las esquinas del botón */
+    border: 0; /* es el borde del botón */
+    outline: 0;  /* es para que el botón no tenga un borde al hacer clic */
+    cursor: pointer; /* es para que el cursor se muestre como un puntero al pasar el ratón por encima del botón */
+    transition: background 1s; /* es la duración de la transición */
+}
+
+/*INPUT-GROUP HACE QUE EL GRUPO DE CAMPOS DE TEXTO SE MUESTRE EN UNA SOLA LÍNEA*/
+.input-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+
+/*BTN-FIELD BUTTON.DISABLE ES PARA EL BOTÓN, PERO NO SE MUESTRA HASTA QUE SE HAGA CLIC EN EL CAMPO DE TEXTO*/
+.btn-field button.disable{
+    background-color: #EAEAEA; /* es el color de fondo del botón */
+    color:#2C2F35; /* es el color del texto del botón */
+}
+
+/*ESTO CAMBIA EL COLOR DE LOS MENSAJES DE ERROR EN EL FORMULARIO AL DEJAR UN CAMPO EN BLANCO*/
+[id$="-error"] {
+    color: #f73354; /* es el color del texto del mensaje de error */
+}
+
+/* EL COLOR DE LA ETIQUETA FECHA DE NACIMIENTO */
+label {
+    color: #9c9999; 
+}
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+}
+
+.button-container button {
+    margin-left: 10px;
+    background-color: rgb(145, 200, 249);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #2e53fa; /* Darker shade on hover */
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #ffffff; /* Change link color to #bd04a4 */
+    text-decoration: none; /* Remove underline */
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.btn-field a,
+.btn-field button {
+    flex-basis: 48%;
+    font-size: 16px;
+    background-color: #2e53fa;
+    color: #ffffff;
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-field a:hover,
+.btn-field button:hover {
+    background-color: #7e93f1; /* Darker shade on hover */
+}
+

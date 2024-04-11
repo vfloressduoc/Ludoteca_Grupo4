@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroGames</title>
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+    
+</head>
+    <div class="button-container">
+        <a href="{%  url 'registrousuario' %}"><button>Crear Cuenta</button></a>
+        <a href="{%  url 'iniciarsesion' %}"><button>Iniciar Sesión</button></a>
+        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+    </div>
+
+
+
+<body>
+
+    <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
+
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="navbar-item"><a href="{%  url 'familiar' %}" class="navbar-link">Familiar</a></li>
+            <li class="navbar-item"><a href=".{%  url 'cooperativo' %}" class="navbar-link">Cooperativo</a></li>
+            <li class="navbar-item"><a href="{%  url 'eurogames' %}" class="navbar-link">EuroGames</a></li>
+            <li class="navbar-item"><a href="{%  url 'deckbuilding' %}" class="navbar-link">DeckBuilding</a></li>
+            <li class="navbar-item"><a href="{%  url 'solitarios' %}" class="navbar-link">Solitarios</a></li>
+        </ul>
+    </nav>
+
+    <!-- Array que recorre imagenes para mostrarlas por intervalo de segundos -->
+    <div class="container border-box">
+    
+        <div class="categoria"> <!-- Contenedor de la categoría -->
+            <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 1 -->
+                <img id="gameImage" src="{% static 'Img/promoenvio.png' %}" alt="envio"> <!-- Imagen de Elden Ring -->
+                <div class="card-content"> <!-- Contenido de la tarjeta -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var images = [
+            '{% static "Img/promoenvio.png" %}',
+            '{% static "Img/promojuegos.png" %}',
+            '{% static "Img/promosede.png" %}',
+            // Agrega aquí las rutas a tus imágenes
+        ];
+        var index = 0;
+        setInterval(function () {
+            var gameImage = document.getElementById('gameImage');
+            gameImage.src = images[index];
+            index = (index + 1) % images.length;
+        }, 1000);
+    </script>
+            
+    
+
+
+    <footer class="footer">
+        <p>@Todos los derechos reservados</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+</html>
