@@ -12,6 +12,9 @@ from .views import recuperarcontrasena
 from .views import editarperfil
 from .views import panel_moderacion
 
+#form_usuario
+from .views import form_usuario
+
 urlpatterns = [
     path('', home, name='home'),
     path('cooperativo/', cooperativo, name='cooperativo'),
@@ -24,6 +27,9 @@ urlpatterns = [
     path('recuperarcontrasena/', recuperarcontrasena, name='recuperarcontrasena'),
     path('editarperfil/', editarperfil, name='editarperfil'),
     path('panel_moderacion/', panel_moderacion, name='panel_moderacion'),
+    
+    #form_usuario
+    path('form_usuario/', form_usuario, name='form_usuario'),
     
 
 ]

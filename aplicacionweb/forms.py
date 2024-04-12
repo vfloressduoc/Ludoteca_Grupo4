@@ -8,5 +8,5 @@ class UsuarioForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'nombre', 'apellido', 'nombreUsuario', 'contrasena', 'direccion']
-        widgets = {
+
 

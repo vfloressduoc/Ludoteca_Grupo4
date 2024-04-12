@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario
+from .forms import UsuarioForm  # Asegúrate de importar tu formulario
+
 
 # Create your views here.
 def home(request):
@@ -32,11 +34,7 @@ def recuperarcontrasena(request):
 def editarperfil(request):
     return render(request, 'aplicacionweb/editarperfil.html')
 
-#panel crud
-def panel_moderacion(request):
-    return render(request, 'aplicacionweb/panel_moderacion.html')
-
-#Metodo para el crud de usuarios (1ra version)
+#Metodo para listar y ver usuarios
 def panel_moderacion(request):
     usuarios = Usuario.objects.all() # SELECT * FROM Usuario
     
@@ -46,6 +44,33 @@ def panel_moderacion(request):
     
     datos = {'usuarios': usuarios}
     return render(request, 'aplicacionweb/panel_moderacion.html', context)
+
+#form_usuario
+# def form_usuario(request):
+#     form = UsuarioForm()  # Crea una nueva instancia de tu formulario
+#     return render(request, 'aplicacionweb/form_usuario.html', {'form': form}) #El form no esta en la guia lo tuve que agregar para que se vieran los items
+
+
+def form_usuario(request):
+    #el view sera el encargado de entregar el formulario al template
+    if request.method == 'POST':
+        #con un request rescatamos los datos del formulario
+        form = UsuarioForm(request.POST)
+        
+        #verificamos si el formulario es valido
+        if form.is_valid():
+            #guardamos el formulario
+            form.save()
+            datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
+        else:
+            datos = {'form': form}
+    else:
+        form = UsuarioForm()  # Crea una nueva instancia de tu formulario
+        datos = {'form': form}
+            
+    return render(request, 'aplicacionweb/form_usuario.html', datos)
+            
+            
 
 
 
