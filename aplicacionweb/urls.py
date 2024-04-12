@@ -24,5 +24,7 @@ urlpatterns = [
     path('recuperarcontrasena/', recuperarcontrasena, name='recuperarcontrasena'),
     path('editarperfil/', editarperfil, name='editarperfil'),
     path('panel_moderacion/', panel_moderacion, name='panel_moderacion'),
+    
+
 ]
 

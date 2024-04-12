@@ -10,7 +10,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=50, verbose_name='Nombre')
     apellido = models.CharField(max_length=50, verbose_name='Apellido')
     nombreUsuario = models.CharField(max_length=50, verbose_name='Usuario')
-    contrasena = models.CharField(max_length=50, verbose_name='Contraseña')
+    contrasena = models.CharField(max_length=50, verbose_name='Contrasena')
     direccion = models.CharField(max_length=200, verbose_name='Direccion')
     
     def __str__(self):

@@ -32,11 +32,12 @@ def recuperarcontrasena(request):
 def editarperfil(request):
     return render(request, 'aplicacionweb/editarperfil.html')
 
+#panel crud
 def panel_moderacion(request):
     return render(request, 'aplicacionweb/panel_moderacion.html')
 
-#Metodo para listar los usuarios
-def listado_usuarios(request):
+#Metodo para el crud de usuarios (1ra version)
+def panel_moderacion(request):
     usuarios = Usuario.objects.all() # SELECT * FROM Usuario
     
     context = {
@@ -45,6 +46,10 @@ def listado_usuarios(request):
     
     datos = {'usuarios': usuarios}
     return render(request, 'aplicacionweb/panel_moderacion.html', context)
+
+
+
+
 
 
 
