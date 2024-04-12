@@ -9,7 +9,7 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=200, verbose_name='Email', unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, verbose_name='Nombre')
     apellido = models.CharField(max_length=50, verbose_name='Apellido')
-    nombreUsuario = models.CharField(max_length=50, verbose_name='Nombre')
+    nombreUsuario = models.CharField(max_length=50, verbose_name='Usuario')
     contrasena = models.CharField(max_length=50, verbose_name='Contraseña')
     direccion = models.CharField(max_length=200, verbose_name='Direccion')
     
@@ -17,8 +17,7 @@ class Usuario(models.Model):
         return self.get_code_name()
     
     def get_code_name(self):
-        return f"Email asociado: {self.email}"
-
+        return f"Email asociado: {self.email} - {self.nombre} - {self.apellido}"
 
 
 

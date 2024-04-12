@@ -10,6 +10,7 @@ from .views import iniciarsesion
 from .views import registrousuario
 from .views import recuperarcontrasena
 from .views import editarperfil
+from .views import panel_moderacion
 
 urlpatterns = [
     path('', home, name='home'),
@@ -22,5 +23,6 @@ urlpatterns = [
     path('registrousuario/', registrousuario, name='registrousuario'),
     path('recuperarcontrasena/', recuperarcontrasena, name='recuperarcontrasena'),
     path('editarperfil/', editarperfil, name='editarperfil'),
+    path('panel_moderacion/', panel_moderacion, name='panel_moderacion'),
 ]
 

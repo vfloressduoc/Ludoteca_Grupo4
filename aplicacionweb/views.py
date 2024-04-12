@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Usuario
 
 # Create your views here.
 def home(request):
@@ -30,6 +31,20 @@ def recuperarcontrasena(request):
 
 def editarperfil(request):
     return render(request, 'aplicacionweb/editarperfil.html')
+
+def panel_moderacion(request):
+    return render(request, 'aplicacionweb/panel_moderacion.html')
+
+#Metodo para listar los usuarios
+def listado_usuarios(request):
+    usuarios = Usuario.objects.all() # SELECT * FROM Usuario
+    
+    context = {
+        'usuarios': usuarios
+        }
+    
+    datos = {'usuarios': usuarios}
+    return render(request, 'aplicacionweb/panel_moderacion.html', context)
 
 
 
