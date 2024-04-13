@@ -10,10 +10,14 @@ from .views import iniciarsesion
 from .views import registrousuario
 from .views import recuperarcontrasena
 from .views import editarperfil
+#MImportaciones para panel de moderacion
 from .views import panel_moderacion
+from .views import form_mod_usuario
 
 #form_usuario
 from .views import form_usuario
+
+from .views import form_del_usuario
 
 urlpatterns = [
     path('', home, name='home'),
@@ -30,7 +34,10 @@ urlpatterns = [
     
     #form_usuario
     path('form_usuario/', form_usuario, name='form_usuario'),
+    #form_mod_usuario
+    path('form_mod_usuario/<id>', form_mod_usuario, name='form_mod_usuario'),
+    #form_del_usuario
+    path('form_del_usuario/<id>', form_del_usuario, name='form_del_usuario'),
     
-
 ]
 

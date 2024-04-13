@@ -7,12 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/panelformularios-adm.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
 
 <body>
+<img src="{% static '/Img/nuevo-paneladmin.png' %}" alt="DATABASE USUARIOS">
+<h3>Creacion de usuario</h3>
 
 <div class='row'>
     <form method='post' action="" id="form">
@@ -31,16 +33,13 @@
     {{ mensaje }}
 </div>
 
+
+
+
+
 <a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
 
-<footer class="footer">
-    <p>@Todos los derechos reservados</p>
-    <div class="social-icons">
-        <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
-    </div>
-</footer>
+
 
 </body>
 

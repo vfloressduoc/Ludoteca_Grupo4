@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/paneladm-style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
@@ -16,20 +16,22 @@
 
 {% block contenido %}
 
-<h1>Muestra de usuarios</h1>
+<img src="{% static '/Img/paneladmin.png' %}" alt="DATABASE USUARIOS">
+<h3>DATABASE USUARIOS</h3>
 
     <div class="container">
         <div class="row">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope='col'>prueba</th>
+                            <th scope='col'>Posicion</th>
                             <th scope='col'>email</th>
                             <th scope='col'>nombre</th>
                             <th scope='col'>apellido</th>
                             <th scope='col'>usuario</th>
                             <th scope='col'>contraseña</th>
                             <th scope='col'>direccion</th>
+                            <th scope='col'>Opciones</th>
                         </tr>
                     </thead>
 
@@ -43,6 +45,8 @@
                             <td>{{ usuario.nombreUsuario }}</td>
                             <td>{{ usuario.contrasena }}</td>
                             <td>{{ usuario.direccion }}</td>
+                            <td><a href="{% url 'form_mod_usuario' usuario.email %}">Modificar</a></td> <!-- se agrega un link para modificar el usuario con el email como parametro -->
+                            <td><a href="{% url 'form_del_usuario' usuario.email %}">Eliminar</a></td> <!-- idem, pero muestra el link para eliminar usuarios -->
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -53,10 +57,12 @@
     
 {% endblock contenido %}
 
-<a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
+<div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <a class="dropdown-item" href="{%  url 'form_usuario' %}"><i class="fas fa-user"></i> Crear usuario</a>
+    <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+</div>
 
 <footer class="footer">
-    <p>@Todos los derechos reservados</p>
     <div class="social-icons">
         <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
         <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
