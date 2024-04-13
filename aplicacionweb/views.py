@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Usuario
-from .forms import UsuarioForm  # Asegúrate de importar tu formulario
+from .forms import UsuarioForm  #formulario de usuario
 
 
 # Create your views here.
@@ -51,6 +51,7 @@ def panel_moderacion(request):
 #     return render(request, 'aplicacionweb/form_usuario.html', {'form': form}) #El form no esta en la guia lo tuve que agregar para que se vieran los items
 
 
+#vista de formulario de usuario para crear un nuevo usuario
 def form_usuario(request):
     #el view sera el encargado de entregar el formulario al template
     if request.method == 'POST':
@@ -70,8 +71,30 @@ def form_usuario(request):
             
     return render(request, 'aplicacionweb/form_usuario.html', datos)
             
-            
 
+#vista de formulario de usuario para modificar un usuario
+def form_mod_usuario(request, id):
+#el id es el que se recibe por parametro apra que sepa a quien editar, es el campo del usuario que le vamos a dar, por ejemplo en este caso el correo electronico unico
+#buscando los datos en la base de datos
+#b buscamos el usuario por el correo
+    usuario = Usuario.objects.get(email=id)
+    datos = {
+         'form' : UsuarioForm(instance=usuario)
+     }   
+    
+    #ahora le entregamos los datos del usuario al formulario
+    if request.method=='POST':
+        
+     #con request recuperamos los datos del formulario y le agregamos el id modificar
+     form = UsuarioForm(data=request.POST, instance=usuario)  
+     
+     #validamos el formulario
+     if form.is_valid():
+            form.save()
+            
+            datos['mensaje'] = "Usuario modificado correctamente"
+         
+    return render(request, 'aplicacionweb/form_mod_usuario.html', datos)
 
 
 
