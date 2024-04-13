@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
 
@@ -33,6 +33,9 @@ def recuperarcontrasena(request):
 
 def editarperfil(request):
     return render(request, 'aplicacionweb/editarperfil.html')
+
+def form_del_usuario(request):
+    return render(request, 'aplicacionweb/form_del_usuario.html')
 
 #Metodo para listar y ver usuarios
 def panel_moderacion(request):
@@ -96,7 +99,12 @@ def form_mod_usuario(request, id):
          
     return render(request, 'aplicacionweb/form_mod_usuario.html', datos)
 
-
+#vista de formulario de usuario para eliminar un usuario
+def form_del_usuario(request, id):
+    usuario = Usuario.objects.get(email=id)
+    usuario.delete()
+    
+    return redirect(to="panel_moderacion")
 
 
 

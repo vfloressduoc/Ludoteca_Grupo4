@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/paneladm-style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
@@ -16,14 +16,14 @@
 
 {% block contenido %}
 
-<h1>Muestra de usuarios</h1>
+<h1>DATABASE USUARIOS</h1>
 
     <div class="container">
         <div class="row">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope='col'>prueba</th>
+                            <th scope='col'>Posicion</th>
                             <th scope='col'>email</th>
                             <th scope='col'>nombre</th>
                             <th scope='col'>apellido</th>
@@ -56,12 +56,12 @@
     
 {% endblock contenido %}
 
-<a class="dropdown-item" href="{%  url 'form_usuario' %}"><i class="fas fa-user"></i> Ver form_usuario para crear usuarios</a>
-
-<a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+<div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <a class="dropdown-item" href="{%  url 'form_usuario' %}"><i class="fas fa-user"></i> Crear usuario</a>
+    <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+</div>
 
 <footer class="footer">
-    <p>@Todos los derechos reservados</p>
     <div class="social-icons">
         <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
         <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
