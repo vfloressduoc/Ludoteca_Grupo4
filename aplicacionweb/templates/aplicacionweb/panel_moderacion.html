@@ -45,6 +45,7 @@
                             <td>{{ usuario.contrasena }}</td>
                             <td>{{ usuario.direccion }}</td>
                             <td><a href="{% url 'form_mod_usuario' usuario.email %}">Modificar</a></td> <!-- se agrega un link para modificar el usuario con el email como parametro -->
+                            <td><a href="{% url 'form_del_usuario' usuario.email %}">Eliminar</a></td> <!-- idem, pero muestra el link para eliminar usuarios -->
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -58,6 +59,7 @@
 <a class="dropdown-item" href="{%  url 'form_usuario' %}"><i class="fas fa-user"></i> Ver form_usuario para crear usuarios</a>
 
 <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+
 <footer class="footer">
     <p>@Todos los derechos reservados</p>
     <div class="social-icons">
