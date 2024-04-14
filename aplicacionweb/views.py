@@ -2,6 +2,14 @@ from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
 from .forms import ClienteForm  #formulario de usuario
+#para iniciar sesion
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+
 
 
 # Create your views here.
@@ -24,7 +32,7 @@ def solitarios(request):
     return render(request, 'aplicacionweb/solitarios.html')
 
 def iniciarsesion(request):
-    return render(request, 'aplicacionweb/iniciarsesion.html')
+    return render(request, 'aplicacionweb/iniciar_sesion.html')
 
 def registrousuario(request):
     return render(request, 'aplicacionweb/registrousuario.html')
@@ -109,18 +117,54 @@ def form_del_usuario(request, id):
 
 
 
-#Registro de Cliente
+#Registro de Cliente (Usando 'User' de Django)
 def reg_clientes(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            form = ClienteForm()  # Crea una nueva instancia de tu formulario
-            datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
+            return redirect('home')
         else:
-            datos = {'form': form}
+            return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
     else:
-        form = ClienteForm()
-        datos = {'form': form}
-            
-    return render(request, 'aplicacionweb/reg_clientes.html', datos)
+        form = CustomUserCreationForm()
+        return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
+
+#Iniciar sesion 
+def iniciar_sesion(request):
+    if request.method == 'POST':
+        username = request.POST['user']
+        password = request.POST['contrasena']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Credenciales de usuario incorrecto')
+            return redirect('iniciar')
+    else:
+        return render(request, 'aplicacionweb/iniciar_sesion.html')
+
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('home')
+
+#Formulario custom para crear usuarios
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
+
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super(CustomUserCreationForm, self).save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
