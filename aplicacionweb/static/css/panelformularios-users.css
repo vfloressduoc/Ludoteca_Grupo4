@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: #000000; 
+    background-color: #87CEFA; 
+    background-size: cover;
+    background-repeat: repeat;
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+img{
+    width: 280px;
+    height: 280px;
+    margin: 30px;
+    border-radius: 30px;    
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 15px; /* Añade un margen superior a la tabla */
+}
+
+table, th, td {
+    border: 1px solid white;
+    padding: 15px; /* Ajusta este valor según tus necesidades */
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.footer {
+    background-color: rgb(22, 22, 22);
+    color: rgb(214, 232, 240);
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: rgb(214, 232, 240);
+    text-decoration: none;
+}
+
+img{
+    width: 280px;
+    height: 280px;
+    margin: 30px;
+    border-radius: 30px;    
+}
+
+/*Esto es para los href (links)*/
+a:link, a:visited {
+    color: white; /* Cambia el color de los enlaces a blanco */
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(137, 200, 255); /* Cambia el color de los enlaces a rojo cuando pasas el ratón por encima */
+}
+
+.social-icons a:link, .social-icons a:visited {
+    margin: 0 10px;
+    color: rgb(255, 255, 255); /* Cambia el color de los enlaces a rojo */
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FFFFFF; 
+    background-color: #007BFF; 
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin: 10px; /* Añade un margen alrededor de cada botón */
+}
+
+.btn:hover {
+    background-color: #4898ee;
+}
+
+/*Esto es para los href (links)*/
+.dropdown-item, .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgb(219, 219, 219);
+    background-color: #353fd4;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Añade un margen a la derecha de cada botón */
+}
+
+.dropdown-item:hover, .btn:hover {
+    background-color: #0056b3;
+}
+
+
+#form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#form .form-group label {
+    margin-top: 10px;
+}
+
+#form .form-group input, 
+#form .form-group select, 
+#form .form-group textarea {
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 15px; /* Añade esta línea para hacer los campos más curvos */
+    margin-top: 5px;
+    height: 30px; 
+}

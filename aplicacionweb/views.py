@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
+from .forms import ClienteForm  #formulario de usuario
 
 
 # Create your views here.
@@ -108,4 +109,18 @@ def form_del_usuario(request, id):
 
 
 
-
+#Registro de Cliente
+def reg_clientes(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = ClienteForm()  # Crea una nueva instancia de tu formulario
+            datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
+        else:
+            datos = {'form': form}
+    else:
+        form = ClienteForm()
+        datos = {'form': form}
+            
+    return render(request, 'aplicacionweb/reg_clientes.html', datos)

@@ -10,3 +10,8 @@ class UsuarioForm(ModelForm):
         fields = ['email', 'nombre', 'apellido', 'nombreUsuario', 'contrasena', 'direccion']
 
 
+class ClienteForm(ModelForm):
+    
+    class Meta:
+        model = Usuario
+        fields = ['email', 'nombre', 'apellido', 'nombreUsuario', 'contrasena', 'direccion']
