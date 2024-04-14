@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404 #redirect, get_object_or_404 para el cart
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
+from django.contrib.auth.decorators import login_required #para el cart
+from django.contrib import messages #para el cart
+from .models import Cart #para el cart
 
 
 # Create your views here.
@@ -107,5 +110,21 @@ def form_del_usuario(request, id):
     return redirect(to="panel_moderacion")
 
 
+'''
+CARRITO DE COMPRAS
+'''
+# @login_required
+def carritodecompras(request):
+    if request.user.is_authenticated:
+        cart_items = Cart.objects.filter(user=request.user)
+    else:
+        cart_items = Cart.objects.all()
+    precio_total = sum(item.cantidad * item.precio for item in cart_items)
 
+    context = {
+        "cart_items": cart_items,
+        "precio_total": precio_total,
+    }
+
+    return render(request, "aplicacionweb/carritodecompras.html", context)
 

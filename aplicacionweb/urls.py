@@ -13,7 +13,7 @@ from .views import editarperfil
 #MImportaciones para panel de moderacion
 from .views import panel_moderacion
 from .views import form_mod_usuario
-
+from .views import carritodecompras
 #form_usuario
 from .views import form_usuario
 
@@ -39,5 +39,8 @@ urlpatterns = [
     #form_del_usuario
     path('form_del_usuario/<id>', form_del_usuario, name='form_del_usuario'),
     
+    #carrito
+        path('carro/carritodecompras/', carritodecompras, name='carritodecompras'),    
+
 ]
 

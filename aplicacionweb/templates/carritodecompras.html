@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+</head>
+
+<body>
+
+    <div class="button-container">
+        <a href="/registrousuario/"><button>Crear Cuenta</button></a>
+        <a href="/iniciarsesion/"><button>Iniciar Sesión</button></a>
+        <a href="/editarperfil/"><button>Editar Cuenta</button></a>
+    </div>
+
+    <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
+
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="navbar-item"><a href="/" class="navbar-link"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="navbar-item"><a href="/familiar/" class="navbar-link">Familiar</a></li>
+            <li class="navbar-item"><a href="/cooperativo/" class="navbar-link">Cooperativo</a></li>
+            <li class="navbar-item"><a href="/eurogames/" class="navbar-link">EuroGames</a></li>
+            <li class="navbar-item"><a href="/deckbuilding/" class="navbar-link">DeckBuilding</a></li>
+        </ul>
+    </nav>
+
+    <div class="container border-box">
+        <h1>Carrito de Compras</h1>
+
+        <div class="categoria">
+            {% for item in cart_items %}
+            <div class="card-12 card-sm-6 card-md-4">
+                <img src="{{ item.producto.imagen_url }}" alt="{{ item.producto.nombre }}">
+                <div class="card-content">
+                    <h2>{{ item.nombre }}</h2>
+                    <p>{{ item.descripcion }}</p>
+                    <p class="precio">Precio: ${{ item.producto.precio }}</p>
+                    <form action="{ % url 'cart:remover_del_cart' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="checkout">
+            <h2>Total: ${{ precio_total }}</h2>
+            <a href="/checkout/"><button>Ir a Pagar</button></a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>@Todos los derechos reservados</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
