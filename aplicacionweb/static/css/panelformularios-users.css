@@ -68,7 +68,7 @@ a:link, a:visited {
 }
 
 a:hover {
-    color: rgb(137, 200, 255); /* Cambia el color de los enlaces a rojo cuando pasas el ratón por encima */
+    color: rgb(137, 255, 192); /* Cambia el color de los enlaces a rojo cuando pasas el ratón por encima */
 }
 
 .social-icons a:link, .social-icons a:visited {
@@ -86,7 +86,7 @@ a:hover {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin: 10px; /* Añade un margen alrededor de cada botón */
+    margin: 20px; /* Aumenta la separación entre los botones */
 }
 
 .btn:hover {
@@ -125,7 +125,17 @@ a:hover {
 #form .form-group textarea {
     background-color: #FFFFFF;
     border: 1px;
-    border-radius: 15px; /* Añade esta línea para hacer los campos más curvos */
+    border-radius: 15px;
     margin-top: 5px;
-    height: 30px; 
+    height: 30px;
+    width: 100%; /* Hace que los campos de entrada sean más largos */
+}
+
+.form-control {
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 15px;
+    margin-top: 5px;
+    height: 30px;
+    width: 100%; /* Hace que los campos de entrada sean más largos */
 }

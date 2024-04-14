@@ -13,37 +13,27 @@
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
     
 </head>
-    <div class="button-container">
-
-        <a href="{%  url 'panel_moderacion' %}"><button>Admin</button></a>
-
-        {% if user.is_authenticated %}
-        <div>
-            <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-            <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-            <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
-
-        </div>
-
-
-
-
-{% else %}
-
-    <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
-    <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
-
-{% endif %}
-
-
-
-
-
-    </div>
-
-
 
 <body>
+
+    <div class="button-container">
+
+        {% if user.is_superuser %}
+            <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+        {% endif %}
+    
+        {% if user.is_authenticated %}
+            <div>
+                <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+                <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+                <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
+            </div>
+        {% else %}
+            <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+            <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
+        {% endif %}
+    </div>
+
 
     <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
 

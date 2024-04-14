@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth.forms import UserChangeForm
+
 
 
 
@@ -40,21 +42,31 @@ def registrousuario(request):
 def recuperarcontrasena(request):
     return render(request, 'aplicacionweb/recuperarcontrasena.html')
 
-def editarperfil(request):
-    return render(request, 'aplicacionweb/editarperfil.html')
+class EditarPerfilForm(UserChangeForm):
+    password = None  # No incluir el campo de contraseña en el formulario
 
-def form_del_usuario(request):
-    return render(request, 'aplicacionweb/form_del_usuario.html')
+    class Meta:
+        model = User
+        fields = ('username', 'email', )
+
+def editarperfil(request):
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return render(request, 'aplicacionweb/editarperfil.html', {'form': form, 'mensaje': 'Perfil actualizado correctamente'})
+    else:
+        form = EditarPerfilForm(instance=request.user)
+        return render(request, 'aplicacionweb/editarperfil.html', {'form': form})
 
 #Metodo para listar y ver usuarios
 def panel_moderacion(request):
-    usuarios = Usuario.objects.all() # SELECT * FROM Usuario
+    usuarios = User.objects.all() # SELECT * FROM auth_user
     
     context = {
         'usuarios': usuarios
-        }
+    }
     
-    datos = {'usuarios': usuarios}
     return render(request, 'aplicacionweb/panel_moderacion.html', context)
 
 #form_usuario
@@ -63,54 +75,54 @@ def panel_moderacion(request):
 #     return render(request, 'aplicacionweb/form_usuario.html', {'form': form}) #El form no esta en la guia lo tuve que agregar para que se vieran los items
 
 
-#vista de formulario de usuario para crear un nuevo usuario
+#vista de formulario de usuario para crear un nuevo usuario (Usando 'User' de Django)
+class CustomUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
+    is_superuser = forms.BooleanField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', )
+
 def form_usuario(request):
-    #el view sera el encargado de entregar el formulario al template
     if request.method == 'POST':
-        #con un request rescatamos los datos del formulario
-        form = UsuarioForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         
-        #verificamos si el formulario es valido
         if form.is_valid():
-            #guardamos el formulario
-            form.save()
+            user = form.save()
+            form = CustomUserCreationForm()  # Crea una nueva instancia del formulario
             datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
         else:
             datos = {'form': form}
     else:
-        form = UsuarioForm()  # Crea una nueva instancia de tu formulario
+        form = CustomUserCreationForm()
         datos = {'form': form}
             
     return render(request, 'aplicacionweb/form_usuario.html', datos)
             
 
-#vista de formulario de usuario para modificar un usuario
-def form_mod_usuario(request, id):
-#el id es el que se recibe por parametro apra que sepa a quien editar, es el campo del usuario que le vamos a dar, por ejemplo en este caso el correo electronico unico
-#buscando los datos en la base de datos
-#b buscamos el usuario por el correo
-    usuario = Usuario.objects.get(email=id)
-    datos = {
-         'form' : UsuarioForm(instance=usuario)
-     }   
-    
-    #ahora le entregamos los datos del usuario al formulario
-    if request.method=='POST':
-        
-     #con request recuperamos los datos del formulario y le agregamos el id modificar
-     form = UsuarioForm(data=request.POST, instance=usuario)  
-     
-     #validamos el formulario
-     if form.is_valid():
-            form.save()
-            
-            datos['mensaje'] = "Usuario modificado correctamente"
-         
-    return render(request, 'aplicacionweb/form_mod_usuario.html', datos)
+#vista de formulario de usuario para modificar un usuario (Usando 'User' de Django)
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'is_superuser', )
 
-#vista de formulario de usuario para eliminar un usuario
+def form_mod_usuario(request, id):
+    usuario = User.objects.get(id=id)
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form, 'mensaje': 'Usuario modificado correctamente'})
+    else:
+        form = CustomUserChangeForm(instance=usuario)
+        return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form})
+    
+
+#vista de formulario de usuario para eliminar un usuario (Usando 'User' de Django)
 def form_del_usuario(request, id):
-    usuario = Usuario.objects.get(email=id)
+    usuario = User.objects.get(id=id)
     usuario.delete()
     
     return redirect(to="panel_moderacion")
