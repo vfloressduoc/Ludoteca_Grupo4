@@ -38,6 +38,16 @@ urlpatterns = [
     path('form_mod_usuario/<id>', form_mod_usuario, name='form_mod_usuario'),
     #form_del_usuario
     path('form_del_usuario/<id>', form_del_usuario, name='form_del_usuario'),
+<<<<<<< Updated upstream
     
+=======
+    #registro de clientes
+    path('reg_clientes/', reg_clientes, name='reg_clientes'),
+    #iniciar sesion
+    path('iniciar_sesion/', iniciar_sesion, name='iniciar_sesion'),
+    path('accounts/login/', iniciar_sesion, name='iniciarsesion'),
+
+    path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
+>>>>>>> Stashed changes
 ]
 

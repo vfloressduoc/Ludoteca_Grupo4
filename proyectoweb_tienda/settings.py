@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'proyectoweb_tienda.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.oracle',
-        "NAME": '127.0.0.1:1521/orcl',
+        "NAME": '127.0.0.1:1521/xe',
         "USER": 'c##ludoteca',
         "PASSWORD": '12345',
         "TEST": {
