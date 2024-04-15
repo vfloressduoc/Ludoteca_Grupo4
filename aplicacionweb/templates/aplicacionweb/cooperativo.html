@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludoteca Duoc - cooperativo</title>
@@ -15,6 +16,8 @@
 
 
 <body>
+
+    <!-- BOTONES DE CABECERA (INICIO, SESION, PANEL ADMIN, ETC) -->
 
     <div class="button-container">
 
@@ -39,7 +42,8 @@
 {% endif %}
     </div>
 
-    
+        <!-- BARRA CATEGORIAS -->
+
 
     <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
 
@@ -53,6 +57,8 @@
         </ul>
     </nav>
 
+        <!-- PRODUCTOS -->
+
 
         <div class="container border-box">
         <h1>COOPERATIVO</h1>
@@ -65,8 +71,8 @@
                     <p>Secretos de la Orden | Juego de Mesa | 1-6 Jugadores | A Partir de 14 años | 2-3 Horas de Tiempo de Juego</p>
                     <p class="precio">Precio: $35.000</p>
                     <!-- Botón de Comprar -->
-                    <a href="{% url 'agregar_al_carrito' 8 %}">
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                    <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
+                        <button type="button">Comprar</button> 
                     </a>
                 </div>
             </div>
@@ -80,13 +86,15 @@
                         <p class="precio">Precio: $20.000</p>
                         <!-- Botón de Comprar -->
                         <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                        <button type="button">Comprar</button> 
                     </a>
                     </div>
             </div>
         </div>
     </div>
     </div>
+
+        <!-- REDES SOCIALES -->
 
     <footer class="footer">
         <p>@Todos los derechos reservados</p>
