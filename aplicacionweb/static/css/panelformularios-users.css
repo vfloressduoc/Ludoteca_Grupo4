@@ -5,8 +5,8 @@
 }
 
 body {
-    color: #b9b9b9; 
-    background-color: rgb(22, 22, 22);
+    color: #000000; 
+    background-color: #87CEFA; 
     background-size: cover;
     background-repeat: repeat;
     font-family: Arial, sans-serif; 
@@ -77,24 +77,20 @@ a:hover {
     text-decoration: none;
 }
 
-.social-icons a:hover {
-    color: rgb(137, 255, 192); /* Cambia el color de los enlaces a verde cuando pasas el ratón por encima */
-}
-
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    color: rgb(219, 219, 219);
-    background-color: #050505;
+    color: #FFFFFF; 
+    background-color: #007BFF; 
     border: none;
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin: 10px; /* Añade un margen alrededor de cada botón */
+    margin: 20px; /* Aumenta la separación entre los botones */
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #4898ee;
 }
 
 /*Esto es para los href (links)*/
@@ -102,7 +98,7 @@ a:hover {
     display: inline-block;
     padding: 10px 20px;
     color: rgb(219, 219, 219);
-    background-color: #050505;
+    background-color: #353fd4;
     border: none;
     border-radius: 5px;
     text-decoration: none;
@@ -127,10 +123,19 @@ a:hover {
 #form .form-group input, 
 #form .form-group select, 
 #form .form-group textarea {
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 15px;
     margin-top: 5px;
+    height: 30px;
+    width: 100%; /* Hace que los campos de entrada sean más largos */
 }
 
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
+.form-control {
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 15px;
+    margin-top: 5px;
+    height: 30px;
+    width: 100%; /* Hace que los campos de entrada sean más largos */
 }

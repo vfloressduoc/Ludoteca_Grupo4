@@ -9,7 +9,7 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=200, verbose_name='Email', unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, verbose_name='Nombre')
     apellido = models.CharField(max_length=50, verbose_name='Apellido')
-    nombreUsuario = models.CharField(max_length=50, verbose_name='Usuario')
+    nombreUsuario = models.CharField(max_length=50, unique=True, verbose_name='Usuario')
     contrasena = models.CharField(max_length=50, verbose_name='Contrasena')
     direccion = models.CharField(max_length=200, verbose_name='Direccion')
     

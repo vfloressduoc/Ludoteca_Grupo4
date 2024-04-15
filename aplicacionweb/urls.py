@@ -6,18 +6,24 @@ from .views import deckbuilding
 from .views import eurogames
 from .views import familiar
 from .views import solitarios
-from .views import iniciarsesion
+from .views import iniciar_sesion
 from .views import registrousuario
 from .views import recuperarcontrasena
 from .views import editarperfil
-#MImportaciones para panel de moderacion
+#Mimportaciones para panel de moderacion
 from .views import panel_moderacion
+#form_mod_usuario
 from .views import form_mod_usuario
-
 #form_usuario
 from .views import form_usuario
-
+#form delete usuario
 from .views import form_del_usuario
+#registro de clientes
+from .views import reg_clientes
+#iniciar sesion
+from .views import iniciar_sesion
+#cerrar sesion
+from .views import cerrar_sesion
 
 urlpatterns = [
     path('', home, name='home'),
@@ -26,7 +32,7 @@ urlpatterns = [
     path('eurogames/', eurogames, name='eurogames'),
     path('familiar/', familiar, name='familiar'),
     path('solitarios/', solitarios, name='solitarios'),
-    path('iniciarsesion/', iniciarsesion, name='iniciarsesion'),
+    path('iniciarsesion/', iniciar_sesion, name='iniciarsesion'),
     path('registrousuario/', registrousuario, name='registrousuario'),
     path('recuperarcontrasena/', recuperarcontrasena, name='recuperarcontrasena'),
     path('editarperfil/', editarperfil, name='editarperfil'),
@@ -38,6 +44,11 @@ urlpatterns = [
     path('form_mod_usuario/<id>', form_mod_usuario, name='form_mod_usuario'),
     #form_del_usuario
     path('form_del_usuario/<id>', form_del_usuario, name='form_del_usuario'),
-    
+    #registro de clientes
+    path('reg_clientes/', reg_clientes, name='reg_clientes'),
+    #iniciar sesion
+    path('iniciar_sesion/', iniciar_sesion, name='iniciar_sesion'),
+    #cerrar sesion
+    path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
 ]
 
