@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
 from .forms import ClienteForm  #formulario de usuario
@@ -10,11 +10,15 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
+from .forms import ProductoForm
+from .models import Producto, Carrito, CarritoProducto
 
 
 
 
 # Create your views here.
+
+#VISTAS GENERALES
 def home(request):
     return render(request, 'aplicacionweb/home.html')
 
@@ -42,9 +46,9 @@ def registrousuario(request):
 def recuperarcontrasena(request):
     return render(request, 'aplicacionweb/recuperarcontrasena.html')
 
+#USUARIO
 class EditarPerfilForm(UserChangeForm):
     password = None  # No incluir el campo de contraseña en el formulario
-
     class Meta:
         model = User
         fields = ('username', 'email', )
@@ -59,9 +63,9 @@ def editarperfil(request):
         form = EditarPerfilForm(instance=request.user)
         return render(request, 'aplicacionweb/editarperfil.html', {'form': form})
 
-#Metodo para listar y ver usuarios
+#VER USUARIOS
 def panel_moderacion(request):
-    usuarios = User.objects.all() # SELECT * FROM auth_user
+    usuarios = User.objects.all() # esto es un SELECT * FROM auth_user
     
     context = {
         'usuarios': usuarios
@@ -69,13 +73,8 @@ def panel_moderacion(request):
     
     return render(request, 'aplicacionweb/panel_moderacion.html', context)
 
-#form_usuario
-# def form_usuario(request):
-#     form = UsuarioForm()  # Crea una nueva instancia de tu formulario
-#     return render(request, 'aplicacionweb/form_usuario.html', {'form': form}) #El form no esta en la guia lo tuve que agregar para que se vieran los items
 
-
-#vista de formulario de usuario para crear un nuevo usuario (Usando 'User' de Django)
+#CREAR USUARIO (Usando 'User' de Django)
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
@@ -102,7 +101,7 @@ def form_usuario(request):
     return render(request, 'aplicacionweb/form_usuario.html', datos)
             
 
-#vista de formulario de usuario para modificar un usuario (Usando 'User' de Django)
+#MODIFICAR UN USUARIO (Usando 'User' de Django)
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
@@ -120,7 +119,7 @@ def form_mod_usuario(request, id):
         return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form})
     
 
-#vista de formulario de usuario para eliminar un usuario (Usando 'User' de Django)
+#ELIMINAR UN USUARIO (Usando 'User' de Django)
 def form_del_usuario(request, id):
     usuario = User.objects.get(id=id)
     usuario.delete()
@@ -129,7 +128,7 @@ def form_del_usuario(request, id):
 
 
 
-#Registro de Cliente (Usando 'User' de Django)
+#REGISTRO COMO CLIENTE (Usando 'User' de Django)
 def reg_clientes(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -142,7 +141,7 @@ def reg_clientes(request):
         form = CustomUserCreationForm()
         return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
 
-#Iniciar sesion 
+#INICIO DE SESION
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
@@ -157,12 +156,12 @@ def iniciar_sesion(request):
     else:
         return render(request, 'aplicacionweb/iniciar_sesion.html')
 
-
+#CERRAR SESION
 def cerrar_sesion(request):
     logout(request)
     return redirect('home')
 
-#Formulario custom para crear usuarios
+#REGISTRO DE USUARIOS (Usando 'User' de Django)
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30, required=True)
@@ -180,3 +179,56 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+# ***** MANIPULAR PRODUCTOS CRUD *****
+
+
+#VER LOS PRODUCTOS
+def panel_productos(request):
+    productos = Producto.objects.all() #Esto es un SELECT * FROM desde la tabla de productos
+    
+    context = {
+        'productos': productos
+    }
+    
+    return render(request, 'aplicacionweb/panel_productos.html', context)
+
+#CREAR PRODUCTOS
+def panel_create_productos(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            form = ProductoForm()  # Crea una nueva instancia del formulario
+            datos = {'form': form, 'mensaje': "Producto guardado exitosamente"}
+        else:
+            datos = {'form': form}
+    else:
+        form = ProductoForm()
+        datos = {'form': form}
+    
+    return render(request, 'aplicacionweb/panel_create_productos.html', datos)
+
+#MODIFICAR PRODUCTOS
+def form_mod_producto(request, id):
+    producto = Producto.objects.get(idProducto=id)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('panel_productos')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'aplicacionweb/form_mod_producto.html', {'form': form})
+
+#ELIMINAR PRODUCTOS
+def form_del_producto(request, id):
+    producto = Producto.objects.get(idProducto=id)
+    producto.delete()
+    
+    return redirect(to="panel_productos")
+
+# ***** AGREGAR PRODUCTOS AL CARRITO *****
+
+
+

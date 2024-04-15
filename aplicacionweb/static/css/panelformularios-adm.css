@@ -134,3 +134,8 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
 }
+
+.image-preview {
+    width: 50px; /* Ajusta el ancho a tu gusto */
+    height: 50px; /* Ajusta la altura a tu gusto */
+}

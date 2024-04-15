@@ -16,10 +16,10 @@
 
 {% block contenido %}
 
-<img src="{% static '/Img/paneladmin.png' %}" alt="DATABASE USUARIOS">
-<h3>DATABASE USUARIOS</h3>
+<img src="{% static '/Img/paneladmin.png' %}" alt="DATABASE PRODUCTOS">
+<h3>DATABASE PRODUCTOS</h3>
 
-<!-- PANEL QUE MUESTRA INFORMACION DE USUARIO -->
+<!-- PANEL PARA MOSTRAR PRODUCTOS -->
 
 <div class="container">
     <div class="row">
@@ -27,24 +27,30 @@
             <thead>
                 <tr>
                     <th scope='col'>ID</th>
-                    <th scope='col'>Email</th>
                     <th scope='col'>Nombre</th>
-                    <th scope='col'>Apellido</th>
-                    <th scope='col'>Nombre de usuario</th>
+                    <th scope='col'>Descripción</th>
+                    <th scope='col'>Precio</th>
+                    <th scope='col'>Imagen</th>
                     <th scope='col'>Opciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                {% for usuario in usuarios %}
+                {% for producto in productos %}
                 <tr>
-                    <td>{{ usuario.id }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.first_name }}</td>
-                    <td>{{ usuario.last_name }}</td>
-                    <td>{{ usuario.username }}</td>
-                    <td><a href="{% url 'form_mod_usuario' usuario.id %}">Modificar</a></td>
-                    <td><a href="{% url 'form_del_usuario' usuario.id %}">Eliminar</a></td>
+                    <td>{{ producto.idProducto }}</td>
+                    <td>{{ producto.nombreProducto }}</td>
+                    <td>{{ producto.descripcionProducto }}</td>
+                    <td>{{ producto.precioProducto }}</td>
+                    <td>
+                        {% if producto.imagenProducto %}
+                        <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}" width="10">
+                        {% else %}
+                        Sin imagen
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'form_mod_producto' producto.idProducto %}">Modificar</a></td>
+                    <td><a href="{% url 'form_del_producto' producto.idProducto %}">Eliminar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -56,7 +62,7 @@
 {% endblock contenido %}
 
 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-    <a class="dropdown-item" href="{%  url 'form_usuario' %}"><i class="fas fa-user"></i> Crear usuario</a>
+    <a class="dropdown-item" href="{%  url 'panel_create_productos' %}"><i class="fas fa-user"></i> Agregar producto</a>
     <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
 </div>
 
