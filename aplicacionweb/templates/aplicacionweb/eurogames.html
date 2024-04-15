@@ -18,6 +18,7 @@
 
         {% if user.is_superuser %}
     <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+    <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
         {% endif %}
 
         {% if user.is_authenticated %}
@@ -59,8 +60,9 @@
                     <img src="{% static 'Img/brass-producto.png' %}" alt="Brass">
              <div class="card-content">
                 <h2>Brass Birmingham</h2>
-                <p>Descripcion: </p>
-                <p class="precio">Precio: $xx</p>
+                <p>Descripcion: Roxley Games- Brass Latón: Birmingham, colores variados (ROX402) , color/modelo surtido
+                </p>
+                <p class="precio">Precio: $100.000</p>
                 <!-- Botón de Comprar -->
                 <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                     <button type="button">Comprar</button> <!-- Botón de Comprar -->
@@ -74,8 +76,8 @@
                     <img src="{% static 'Img/dune-producto.png' %}" alt="Dune">
                 <div class="card-content">
                     <h2>Dune Imperium</h2>
-                    <p></p>Descripcion:
-                    <p class="precio">Precio: $xx</p>
+                    <p>Descripcion: Asmodee - Dune: Imperium, Juego de Mesa, 1-4 Jugadores, 13+ Años, Edición en Italiano</p>
+                    <p class="precio">Precio: $45.000</p>
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                         <button type="button">Comprar</button> <!-- Botón de Comprar -->
