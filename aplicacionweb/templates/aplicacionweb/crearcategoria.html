@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREAR CATEGORIA</title>
+    <link rel="stylesheet" href="{% static '/css/panelformularios-adm.css' %}">
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+
+</head>
+
+<body>
+<img src="{% static '/Img/nuevo-paneladmin.png' %}" alt="DATABASE USUARIOS">
+<h3>Creacion de una categoria</h3>
+
+<div class='row'>
+    <form method='post' action="" id="form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_table }}
+        </div>
+
+        <input type="submit" class="btn btn-danger" id="enviar" value="Enviar">
+        <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
+        <div id="error" class="alert alert-danger" role="alert"></div>
+    </form>
+</div>
+
+<div class="alert alert-success" role="alert">
+    {{ mensaje }}
+</div>
+
+
+
+
+
+<a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
+
+
+
+</body>
+
+</html>

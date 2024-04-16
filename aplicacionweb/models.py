@@ -25,15 +25,7 @@ class Usuario(models.Model):
     
 #CREANDO LAS CLASES
 class Categoria(models.Model):
-    CATEGORIAS = [
-        ('Familiar', 'Familiar'),
-        ('Cooperativo', 'Cooperativo'),
-        ('Eurogame', 'Eurogame'),
-        ('Deckbuilding', 'Deckbuilding'),
-        ('Solitario', 'Solitario'),
-    ]
-
-    nombre = models.CharField(max_length=50, choices=CATEGORIAS)
+    nombre = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre

@@ -15,11 +15,15 @@
 
 <body>
 
+        <!-- BOTONES DE CABECERA  -->
+
     <div class="button-container">
 
         {% if user.is_superuser %}
-    <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
-    <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+            <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+            <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+            <a href="{%  url 'crearcategoria' %}"><button>crear categoria</button></a>
+            <a href="{%  url 'crearproveedor' %}"><button>crear proveedor</button></a>
         {% endif %}
 
         {% if user.is_authenticated %}
@@ -38,7 +42,7 @@
 {% endif %}
     </div>
 
-    
+    <!-- CATEGORIAS -->
 
     <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
 
@@ -52,40 +56,41 @@
         </ul>
     </nav>
 
+    <!-- PRODUCTOS -->
 
         <div class="container border-box">
 
-        <h1>FAMILIAR</h1> <!-- Encabezado de la categoría -->
+        <h1>FAMILIAR</h1> 
 
-        <div class="categoria"> <!-- Contenedor de la categoría -->
-            <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 1 -->
-                <img src="{% static 'Img/7wonders-producto.png' %}" alt="7 wonders"> <!-- Imagen de Elden Ring -->
-                <div class="card-content"> <!-- Contenido de la tarjeta -->
-                    <h2>7 Wonders Nueva Edición</h2> <!-- Título del juego -->
+        <div class="categoria"> 
+            <div class="card-12 card-sm-6 card-md-4"> 
+                <img src="{% static 'Img/7wonders-producto.png' %}" alt="7 wonders"> 
+                <div class="card-content"> 
+                    <h2>7 Wonders Nueva Edición</h2> 
                     <p>Descripcion del producto: Juego de Cartas en Español
                         Recomendado a Partir de 10 Años de Edad
                         Juego de 3 a 7 Jugadores
                         Con una duración de 30 Minutos por partida
-                        Apto para personas con daltonismo.</p> <!-- Descripción del juego -->
-                    <p class="precio">Precio: $45.000</p> <!-- Precio del juego -->
-                    <!-- Botón de Comprar -->
+                        Apto para personas con daltonismo.</p> 
+                    <p class="precio">Precio: $45.000</p> 
+                    
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                        <button type="button">Comprar</button> 
                     </a>
                 </div>
             </div>
                 </div>
             </div>
 
-            <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 2 -->
-                    <img src="{% static 'Img/dixit-producto.png' %}" alt="Dixit"> <!-- Imagen de God of War 2 -->
-                <div class="card-content"> <!-- Contenido de la tarjeta -->
-                    <h2>Dixit</h2> <!-- Título del juego -->
+            <div class="card-12 card-sm-6 card-md-4"> 
+                    <img src="{% static 'Img/dixit-producto.png' %}" alt="Dixit"> 
+                <div class="card-content"> 
+                    <h2>Dixit</h2> 
                     <p>Descripcion del producto: Libellud | Dixit Classic | Juego de Mesa de Imaginación y Creatividad Ganador de Varios Premios| A Partir de 8 Años | De 3 a 8 Jugadores | 30 Minutos por Partida | En Español</p> <!-- Descripción del juego -->
-                    <p class="precio">Precio: $25.000</p> <!-- Precio del juego -->
-                    <!-- Botón de Comprar -->
+                    <p class="precio">Precio: $25.000</p> 
+                    
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                        <button type="button">Comprar</button> 
                     </a>
                 </div>
             </div>
@@ -94,6 +99,8 @@
         </div>
     </div>
     </div>
+
+        <!-- REDES SOCIALES -->
 
     <footer class="footer">
         <p>@Todos los derechos reservados</p>
