@@ -2,8 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from .models import Usuario
 from .models import Producto
-from .models import Categoria
-from .models import Proveedor
 
 
 #creamos nuestra clase para el fomrulario desde la base de datos
@@ -21,3 +19,12 @@ class ClienteForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'nombre', 'apellido', 'nombreUsuario', 'contrasena', 'direccion']
+
+#ProductoForm sirve para crear un nuevo producto (usando el modelo Producto)
+class ProductoForm(ModelForm):
+    
+    class Meta:
+        model = Producto
+        fields = ['nombreProducto', 'precioProducto', 'descripcionProducto', 'imagenProducto', 'categoria', 'proveedor']
+        
+        

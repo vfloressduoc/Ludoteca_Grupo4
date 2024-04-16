@@ -12,7 +12,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from .forms import ProductoForm
 from .models import Producto, Carrito, CarritoProducto
-from .forms import categoriaForm, proveedorForm
+
 
 
 # Create your views here.
