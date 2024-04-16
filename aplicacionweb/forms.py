@@ -21,22 +21,3 @@ class ClienteForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['email', 'nombre', 'apellido', 'nombreUsuario', 'contrasena', 'direccion']
-
-#ProductoForm sirve para crear un nuevo producto (usando el modelo Producto)
-class ProductoForm(forms.ModelForm):
-    class Meta:
-        model = Producto
-        fields = ['nombreProducto', 'precioProducto', 'descripcionProducto', 'imagenProducto', 'categoria', 'proveedor']
-        
-class categoriaForm(ModelForm):
-    
-    class Meta:
-        model = Categoria
-        fields = ['nombre']
-        
-class proveedorForm(forms.ModelForm):
-    nombre = forms.CharField(max_length=100)
-
-    class Meta:
-        model = Proveedor
-        fields = ['nombre']

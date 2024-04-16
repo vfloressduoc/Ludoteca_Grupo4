@@ -26,8 +26,7 @@ from .views import panel_create_productos
 from .views import panel_productos
 from .views import form_mod_producto
 from .views import form_del_producto
-from .views import crearcategoria
-from .views import crearproveedor
+
 
 
 
@@ -56,8 +55,6 @@ urlpatterns = [
     path('panel_productos/', panel_productos, name='panel_productos'),
     path('form_mod_producto/<int:id>/', views.form_mod_producto, name='form_mod_producto'),
     path('form_del_producto/<id>', form_del_producto, name='form_del_producto'),
-    path('crearcategoria/', crearcategoria, name='crearcategoria'),
-    path('crearproveedor/', crearproveedor, name='crearproveedor'),
     
 ] 
 

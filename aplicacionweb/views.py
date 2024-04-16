@@ -227,33 +227,6 @@ def form_del_producto(request, id):
     
     return redirect(to="panel_productos")
 
-#CREAR CATEGORIA
-def crearcategoria(request):
-    if request.method == 'POST':
-        form = categoriaForm (request.POST)  # Cambiado a 'CategoriaForm'
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            return render(request, 'aplicacionweb/crearcategoria.html', {'form': form})
-    else:
-        form = categoriaForm ()  # Cambiado a 'CategoriaForm'
-        return render(request, 'aplicacionweb/crearcategoria.html', {'form': form})
-
-#CREAR PROVEEDOR 
-def crearproveedor(request):
-    if request.method == 'POST':
-        form = proveedorForm(request.POST)  # Cambiado a 'ProveedorForm'
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            return render(request, 'aplicacionweb/crearproveedor.html', {'form': form})
-    else:
-        form = proveedorForm()  # Cambiado a 'ProveedorForm'
-        return render(request, 'aplicacionweb/crearproveedor.html', {'form': form})
-
-# ***** AGREGAR PRODUCTOS AL CARRITO *****
 
 
 
