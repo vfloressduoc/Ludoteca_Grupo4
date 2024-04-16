@@ -204,8 +204,3 @@ button:hover {
 .social-icons i {
     font-size: 24px;
 }
-
-/*Icono para el logo de admin en las pantallas*/
-.admin-icon {
-    width: 20px; /* Cambia este valor para ajustar el tamaño de la imagen */
-}
