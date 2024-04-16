@@ -7,21 +7,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RetroGames - Horror</title>
+    <title>Ludoteca Duoc - Solitarios</title>
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
 
-    <div class="button-container">
-        <a href="{%  url 'registrousuario' %}"><button>Crear Cuenta</button></a>
-        <a href="{%  url 'iniciarsesion' %}"><button>Iniciar Sesión</button></a>
-        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-    </div>
 
 <body>
 
-    <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
+    <div class="button-container">
+
+        {% if user.is_superuser %}
+    <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+    <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div>
+            <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+            <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+            <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
+
+        </div>
+
+{% else %}
+
+    <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+    <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
+
+{% endif %}
+    </div>
+
+    <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="ludotecaduoc" id="logo">
+
+    <!-- CODIGO PARA MODIFICAR UN PRODUCTO -->
 
     <nav class="navbar">
         <ul class="navbar-list">
@@ -36,17 +56,19 @@
         
         <div class="container border-box">
         <h1>SOLITARIOS</h1>
+        
+        <!-- PRODUCTOS -->
 
         <div class="categoria">
             <div class="card-12 card-sm-6 card-md-4">
                     <img src="{% static 'Img/7continent-producto.png' %}" alt="7th Continent">
                 <div class="card-content">
-                    <h2>The 7 Continent</h2>
-                    <p>Descripcion:</p>
-                    <p class="precio">Precio: $xx</p>
+                    <h2>The 7th Continent</h2>
+                    <p>Descripcion: Core Box 2nd Edition - Juego básico de iniciación (versión inglesa)</p>
+                    <p class="precio">Precio: $80.000</p>
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                        <button type="button">Comprar</button> 
                     </a>
                 </div>
             </div>
@@ -55,13 +77,13 @@
 
             <div class="card-12 card-sm-6 card-md-4">
                     <img src="{% static 'Img/viernes-producto.png' %}" alt="Viernes">
-                <dic class="card-content">
+                <div class="card-content">
                 <h2>Viernes</h2>
-                <p>Descripcion:</p>
-                <p class="precio">Precio: $xx</p>
+                <p>Descripcion: Edge Studio | Viernes | Juego de Cartas de Estrategia para un Solo Jugador | A Partir de 10 Años | Juego en solitario | 30 Minutos por Partida |</p>
+                <p class="precio">Precio: $20.000</p>
                 <!-- Botón de Comprar -->
                 <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
-                    <button type="button">Comprar</button> <!-- Botón de Comprar -->
+                    <button type="button">Comprar</button> 
                 </a>
             </div>
         </div>
@@ -71,6 +93,8 @@
     </div>
 
     </div>
+
+    <!-- REDES SOCIALES -->
 
     <footer class="footer">
         <p>@Todos los derechos reservados</p>

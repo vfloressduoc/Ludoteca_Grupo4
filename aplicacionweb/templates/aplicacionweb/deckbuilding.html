@@ -12,13 +12,34 @@
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
-    <div class="button-container">
-        <a href="{%  url 'registrousuario' %}"><button>Crear Cuenta</button></a>
-        <a href="{%  url 'iniciarsesion' %}"><button>Iniciar Sesión</button></a>
-        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-    </div>
+
 
 <body>
+
+    <div class="button-container">
+
+        {% if user.is_superuser %}
+    <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+    <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div>
+            <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+            <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+            <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
+
+        </div>
+
+{% else %}
+
+    <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+    <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
+
+{% endif %}
+    </div>
+    
 
     <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
 
@@ -41,8 +62,8 @@
                     <img src="{% static 'Img/marvelchampions-producto.png' %}" alt="Marvel Champions"> 
                 <div class="card-content">
                     <h2>Marvel Champions</h2>
-                    <p>Descripcion: </p>
-                    <p class="precio">Precio: $xx</p>
+                    <p>Descripcion: El juego de Cartas | Juego de Estrategia y Superhéroes Cooperativo | A Partir de 14 Años | De 1 a 4 Jugadores | 45-90 Minutos por Partida | Español</p>
+                    <p class="precio">Precio: $55.000</p>
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                         <button type="button">Comprar</button> <!-- Botón de Comprar -->
@@ -56,8 +77,8 @@
                     <img src="{% static 'Img/herorealms-producto.png' %}" alt="Hero Realms">
                 <div class="card-content">
                     <h2>Hero Realms</h2>
-                    <p>Descripcion: </p>
-                    <p class="precio">Precio: $xx</p>
+                    <p>Descripcion: Devir - Hero Realms, Juego de Cartas 12 años, Fácil y Divertido (BGHR) </p>
+                    <p class="precio">Precio: $18.000</p>
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                         <button type="button">Comprar</button> <!-- Botón de Comprar -->

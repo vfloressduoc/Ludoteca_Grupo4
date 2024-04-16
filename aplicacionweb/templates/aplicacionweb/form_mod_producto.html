@@ -13,30 +13,33 @@
 
 </head>
 
+
   <body>
-    <img src="{% static '/Img/editar-paneladmin.png' %}" alt="DATABASE USUARIOS">
-    <h3>Modificacion de usuario</h3>
+    <img src="{% static '/Img/editar-paneladmin.png' %}" alt="DATABASE PRODUCTO">
+    <h3>Modificacion de producto</h3>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
+    <!-- CODIGO PARA MODIFICAR UN PRODUCTO -->
+
     <div class="row">
-        <form method="post" action="" id="form">
+        <form method="post" action="" id="form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-                {{ form.as_table }}
+                {{ form.nombreProducto.label_tag }} {{ form.nombreProducto }}
+                {{ form.descripcionProducto.label_tag }} {{ form.descripcionProducto }}
+                {{ form.precioProducto.label_tag }} {{ form.precioProducto }}
+                {{ form.imagenProducto.label_tag }} {{ form.imagenProducto }}
+                {{ form.categoria.label_tag }} {{ form.categoria }}
+                {{ form.proveedor.label_tag }} {{ form.proveedor }}
             </div>
-
+        
             <input type="submit" class="btn btn-danger" id="enviar" value="Modificar">
             <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
             <div id="error" class="alert alert-danger" role="alert"></div>
         </form>
-    <div class="alert alert-success" role="alert">
-        {{ mensaje }}
     </div>
-</div> 
 
 <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
-<a href="{% url 'panel_moderacion' %}" class="btn"><i class="fas fa-home"></i> PANEL ADMIN</a>
-
 
 </body>
 

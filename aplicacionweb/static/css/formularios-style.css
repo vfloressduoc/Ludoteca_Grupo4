@@ -165,7 +165,7 @@ label {
 }
 
 .button-container button:hover {
-    background-color: #2e53fa; /* Darker shade on hover */
+    background-color: #2e53fa; 
 }
 
 .forgot-password {
@@ -174,12 +174,12 @@ label {
 }
 
 .forgot-password a {
-    color: #ffffff; /* Change link color to #bd04a4 */
-    text-decoration: none; /* Remove underline */
+    color: #ffffff; 
+    text-decoration: none;
 }
 
 .forgot-password a:hover {
-    text-decoration: underline; /* Add underline on hover */
+    text-decoration: underline; 
 }
 
 .btn-field a,
@@ -198,6 +198,6 @@ label {
 
 .btn-field a:hover,
 .btn-field button:hover {
-    background-color: #7e93f1; /* Darker shade on hover */
+    background-color: #7e93f1; 
 }
 

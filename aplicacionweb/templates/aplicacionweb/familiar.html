@@ -13,13 +13,32 @@
 
 </head>
 
+<body>
+
     <div class="button-container">
-        <a href="{%  url 'registrousuario' %}"><button>Crear Cuenta</button></a>
-        <a href="{%  url 'iniciarsesion' %}"><button>Iniciar Sesión</button></a>
-        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+
+        {% if user.is_superuser %}
+    <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
+    <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div>
+            <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+            <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+            <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
+
+        </div>
+
+{% else %}
+
+    <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+    <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
+
+{% endif %}
     </div>
 
-<body>
+    
 
     <img src="{% static 'Img/ludotecaduoc-logo.png' %}" alt="bibliotecaduoc" id="logo">
 
@@ -42,9 +61,13 @@
             <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 1 -->
                 <img src="{% static 'Img/7wonders-producto.png' %}" alt="7 wonders"> <!-- Imagen de Elden Ring -->
                 <div class="card-content"> <!-- Contenido de la tarjeta -->
-                    <h2>7 Wonders</h2> <!-- Título del juego -->
-                    <p>Descripcion del producto:</p> <!-- Descripción del juego -->
-                    <p class="precio">Precio: $xx</p> <!-- Precio del juego -->
+                    <h2>7 Wonders Nueva Edición</h2> <!-- Título del juego -->
+                    <p>Descripcion del producto: Juego de Cartas en Español
+                        Recomendado a Partir de 10 Años de Edad
+                        Juego de 3 a 7 Jugadores
+                        Con una duración de 30 Minutos por partida
+                        Apto para personas con daltonismo.</p> <!-- Descripción del juego -->
+                    <p class="precio">Precio: $45.000</p> <!-- Precio del juego -->
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                         <button type="button">Comprar</button> <!-- Botón de Comprar -->
@@ -58,8 +81,8 @@
                     <img src="{% static 'Img/dixit-producto.png' %}" alt="Dixit"> <!-- Imagen de God of War 2 -->
                 <div class="card-content"> <!-- Contenido de la tarjeta -->
                     <h2>Dixit</h2> <!-- Título del juego -->
-                    <p>Descripcion del producto:</p> <!-- Descripción del juego -->
-                    <p class="precio">Precio: $xx</p> <!-- Precio del juego -->
+                    <p>Descripcion del producto: Libellud | Dixit Classic | Juego de Mesa de Imaginación y Creatividad Ganador de Varios Premios| A Partir de 8 Años | De 3 a 8 Jugadores | 30 Minutos por Partida | En Español</p> <!-- Descripción del juego -->
+                    <p class="precio">Precio: $25.000</p> <!-- Precio del juego -->
                     <!-- Botón de Comprar -->
                     <a href="https://www.youtube.com/watch?v=RjOOYjuOYf0" target="_blank">
                         <button type="button">Comprar</button> <!-- Botón de Comprar -->

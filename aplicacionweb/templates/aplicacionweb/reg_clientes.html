@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/panelformularios-adm.css' %}">
+    <link rel="stylesheet" href="{% static '/css/panelformularios-users.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
 
 <body>
-<img src="{% static '/Img/nuevo-paneladmin.png' %}" alt="DATABASE USUARIOS">
+<img src="{% static '/Img/iconopeon.png' %}" alt="DATABASE USUARIOS">
 <h3>Creacion de usuario</h3>
 
 <div class='row'>
@@ -23,7 +23,7 @@
             {{ form.as_table }}
         </div>
 
-        <input type="submit" class="btn btn-danger" id="enviar" value="Enviar">
+        <input type="submit" class="btn btn-danger" id="enviar" value="Registrarse">
         <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
         <div id="error" class="alert alert-danger" role="alert"></div>
     </form>
@@ -37,8 +37,9 @@
 
 
 
-<a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
-<a href="{% url 'panel_moderacion' %}" class="btn"><i class="fas fa-home"></i> PANEL ADMIN</a>
+<a href="{% url 'home' %}" class="btn">Regresar a Inicio</a>
+
+
 
 </body>
 

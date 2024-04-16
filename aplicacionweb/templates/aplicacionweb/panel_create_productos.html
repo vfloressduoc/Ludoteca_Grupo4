@@ -13,11 +13,14 @@
 </head>
 
 <body>
-<img src="{% static '/Img/nuevo-paneladmin.png' %}" alt="DATABASE USUARIOS">
-<h3>Creacion de usuario</h3>
+
+<img src="{% static '/Img/nuevo-paneladmin.png' %}" alt="DATABASE PRODUCTO">
+<h3>CREACION DE PRODUCTO</h3>
+
+<!-- CODIGO PARA CREAR UN PRODUCTO -->
 
 <div class='row'>
-    <form method='post' action="" id="form">
+    <form method='post' action="" id="form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             {{ form.as_table }}
@@ -36,9 +39,10 @@
 
 
 
-
+<a href="{% url 'panel_productos' %}" class="btn">PANEL</a>
 <a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
-<a href="{% url 'panel_moderacion' %}" class="btn"><i class="fas fa-home"></i> PANEL ADMIN</a>
+
+
 
 </body>
 
