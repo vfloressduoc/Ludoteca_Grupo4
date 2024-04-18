@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+# IMPORTACIONES DESDE OTROS LUGARES PARA PODER LEERLAS
+#TODO Depurar las importaciones, puede que algunas no se esten usando, en tal caso, borrar.
 from .models import Usuario
 from .forms import UsuarioForm  #formulario de usuario
 from .forms import ClienteForm  #formulario de usuario
-#para iniciar sesion
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
@@ -18,21 +20,28 @@ from .models import Producto, Carrito, CarritoProducto
 # Create your views here.
 
 #VISTAS GENERALES
+#Lo que hace esto es decir que cuando se entre a la pagina principal, se renderice el archivo home.html.
+
+
 def home(request):
     return render(request, 'aplicacionweb/home.html')
 
 def cooperativo(request):
     return render(request, 'aplicacionweb/cooperativo.html')
 
+#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def deckbuilding(request):
     return render(request, 'aplicacionweb/deckbuilding.html')
 
+#! El segundo boton 'comprar' en eurogames.html se extiende de esquina a esquina
 def eurogames(request):
     return render(request, 'aplicacionweb/eurogames.html')
 
+#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def familiar(request):
     return render(request, 'aplicacionweb/familiar.html')
 
+#! El segundo boton 'comprar' en solitarios.html se extiende de esquina a esquina
 def solitarios(request):
     return render(request, 'aplicacionweb/solitarios.html')
 
@@ -45,7 +54,11 @@ def registrousuario(request):
 def recuperarcontrasena(request):
     return render(request, 'aplicacionweb/recuperarcontrasena.html')
 
-#USUARIO
+#*DEFINICION DE CLASES (COMO SE VERÁ LA PAGINA)
+#TODO Organizar las clases de acuerdo a la estructura de la pagina web, quitar las que no esten en uso.
+#TODO Cambiar el nombre de las clases a algo mas descriptivo, ej: 'form_usuario' a 'form_create_usuario'.
+
+#EDITAR DATOS DE UN USUARIO EXISTENTE (Usando 'User' de Django)
 class EditarPerfilForm(UserChangeForm):
     password = None  # No incluir el campo de contraseña en el formulario
     class Meta:
@@ -141,6 +154,7 @@ def reg_clientes(request):
         return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
 
 #INICIO DE SESION
+#! Feedback: Al inciar sesion, si las credenciales son incorrectas, la web se cae, necesitamos un filtro.
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
@@ -179,8 +193,12 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
     
-# ***** MANIPULAR PRODUCTOS CRUD *****
 
+# RECUPERACION DE CONTRASEÑA
+#TODO Pendiente de implementar la 'recuperacion de contraseña'
+
+
+#MANIPULAR PRODUCTOS CRUD 
 
 #VER LOS PRODUCTOS
 def panel_productos(request):
@@ -192,7 +210,9 @@ def panel_productos(request):
     
     return render(request, 'aplicacionweb/panel_productos.html', context)
 
+
 #CREAR PRODUCTOS
+#TODO Feedback: Solicita un proveedor y una categoria que no aparecen, podria cambiarse en models. el tipo de datos a Char para ingresar dato (pendiente a que podria romper algo mas).
 def panel_create_productos(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -228,5 +248,7 @@ def form_del_producto(request, id):
     return redirect(to="panel_productos")
 
 
-
+#CARRITO DE COMPRAS
+#TODO Pendiente de implementar la logica del 'carrito de compra'
+#TODO Pendiente de implementar 'orden de compra' luego de comprar un carrito
 
