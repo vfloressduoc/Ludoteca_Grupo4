@@ -21,8 +21,7 @@
         {% if user.is_superuser %}
             <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
             <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
-            <a href="{%  url 'crearcategoria' %}"><button>crear categoria</button></a>
-            <a href="{%  url 'crearproveedor' %}"><button>crear proveedor</button></a>
+
         {% endif %}
 
         {% if user.is_authenticated %}
