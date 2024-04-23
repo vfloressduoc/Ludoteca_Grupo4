@@ -27,22 +27,22 @@ def cooperativo(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/cooperativo.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def deckbuilding(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/deckbuilding.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en eurogames.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def eurogames(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/eurogames.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def familiar(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/familiar.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def solitarios(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/solitarios.html', {'productos': productos})
@@ -274,6 +274,18 @@ def carrito_compras(request):
     carrito = get_object_or_404(Carrito, usuario=request.user)
     carrito_productos = CarritoProducto.objects.filter(carrito=carrito)
     return render(request, 'aplicacionweb/carrito_compras.html', {'carrito_productos': carrito_productos})
+
+@login_required
+def quitar_del_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, idProducto=producto_id)
+    carrito = get_object_or_404(Carrito, usuario=request.user)
+    carrito_producto = get_object_or_404(CarritoProducto, carrito=carrito, producto=producto)
+    if carrito_producto.cantidad > 1:
+        carrito_producto.cantidad -= 1
+        carrito_producto.save()
+    else:
+        carrito_producto.delete()
+    return redirect('carrito_compras')
 
 #TODO Pendiente de implementar la logica del 'carrito de compra'
 #TODO Pendiente de implementar 'orden de compra' luego de comprar un carrito
