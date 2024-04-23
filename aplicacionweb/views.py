@@ -158,7 +158,7 @@ def reg_clientes(request):
         return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
 
 #INICIO DE SESION
-#! Feedback: Al inciar sesion, si las credenciales son incorrectas, la web se cae, necesitamos un filtro.
+#! Feedback: Al ingresar un usuario incorrecto y posteriormente una contraseña incorrecta, persiste el mensaje "usuario incorrecto" y viseversa, se debe limpiar
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
@@ -257,6 +257,7 @@ def form_del_producto(request, id):
 #CARRITO DE COMPRAS
 
 #BOTON PARA AGREGAR ITEM A CARRITO
+#!Si no estas logeado se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados"
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, idProducto=producto_id)
