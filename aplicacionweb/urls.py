@@ -27,7 +27,8 @@ from .views import panel_productos
 from .views import form_mod_producto
 from .views import form_del_producto
 
-
+from .views import agregar_al_carrito
+from .views import carrito_compras
 
 
 
@@ -55,6 +56,7 @@ urlpatterns = [
     path('panel_productos/', panel_productos, name='panel_productos'),
     path('form_mod_producto/<int:id>/', views.form_mod_producto, name='form_mod_producto'),
     path('form_del_producto/<id>', form_del_producto, name='form_del_producto'),
-    
+    path('agregar_al_carrito/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito_compras/', carrito_compras, name='carrito_compras'),
 ] 
 

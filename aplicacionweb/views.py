@@ -12,6 +12,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from .forms import ProductoForm
 from .models import Producto, Carrito, CarritoProducto
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -253,6 +255,25 @@ def form_del_producto(request, id):
 
 
 #CARRITO DE COMPRAS
+
+#BOTON PARA AGREGAR ITEM A CARRITO
+@login_required
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, idProducto=producto_id)
+    carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
+    carrito_producto, creado = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
+    if not creado:
+        carrito_producto.cantidad += 1
+        carrito_producto.save()
+    return redirect('carrito_compras')
+
+#PAGINA PARA VER EL CARRITO
+@login_required
+def carrito_compras(request):
+    carrito = get_object_or_404(Carrito, usuario=request.user)
+    carrito_productos = CarritoProducto.objects.filter(carrito=carrito)
+    return render(request, 'aplicacionweb/carrito_compras.html', {'carrito_productos': carrito_productos})
+
 #TODO Pendiente de implementar la logica del 'carrito de compra'
 #TODO Pendiente de implementar 'orden de compra' luego de comprar un carrito
 

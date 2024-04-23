@@ -63,6 +63,7 @@
         <div class="container border-box">
         <h1>COOPERATIVO</h1>
 
+        <!-- Arkham Horror: PROBANDO CARRITO -->
         {% for producto in productos %}
             {% if producto.idProducto == 21 %}
                 <div class="categoria">
@@ -72,13 +73,20 @@
                             <h2>{{ producto.nombreProducto }}</h2>
                             <p>{{ producto.descripcionProducto }}</p>
                             <p class="precio">Precio: ${{ producto.precioProducto }}</p>
+                            
                             <!-- Botón de Comprar -->
-                            <button type="button">Comprar</button> 
+                            <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}">
+                                {% csrf_token %}
+                                <button type="submit">Comprar</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
+
+
 
         {% for producto in productos %}
             {% if producto.idProducto == 22 %}
