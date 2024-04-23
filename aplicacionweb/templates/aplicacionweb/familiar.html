@@ -59,46 +59,43 @@
         <div class="container border-box">
 
         <h1>FAMILIAR</h1> 
-
-        <div class="categoria"> 
-            <div class="card-12 card-sm-6 card-md-4"> 
-                <img src="{% static 'Img/7wonders-producto.png' %}" alt="7 wonders"> 
-                <div class="card-content"> 
-                    <h2>7 Wonders Nueva Edición</h2> 
-                    <p>Descripcion del producto: Juego de Cartas en Español
-                        Recomendado a Partir de 10 Años de Edad
-                        Juego de 3 a 7 Jugadores
-                        Con una duración de 30 Minutos por partida
-
-                        Apto para personas con daltonismo.</p> <!-- Descripción del juego -->
-                        <p class="precio">Precio: $45.000</p> <!-- Precio del juego -->
+        
+        <!-- Producto: Dixit -->
+        {% for producto in productos %}
+        {% if producto.idProducto == 20 %}
+            <div class="categoria">
+                <div class="card-12 card-sm-6 card-md-4">
+                    <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                    <div class="card-content">
+                        <h2>{{ producto.nombreProducto }}</h2>
+                        <p>{{ producto.descripcionProducto }}</p>
+                        <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                         <!-- Botón de Comprar -->
-                        <button type="button">Comprar</button> <!-- Botón de Comprar -->
-
-                    </a>
+                        <button type="button">Comprar</button> 
+                    </div>
                 </div>
             </div>
-                </div>
-            </div>
+        {% endif %}
+    {% endfor %}
             
-
-            <div class="card-12 card-sm-6 card-md-4"> 
-                    <img src="{% static 'Img/dixit-producto.png' %}" alt="Dixit"> 
-                <div class="card-content"> 
-                    <h2>Dixit</h2> 
-                    <p>Descripcion del producto: Libellud | Dixit Classic | Juego de Mesa de Imaginación y Creatividad Ganador de Varios Premios| A Partir de 8 Años | De 3 a 8 Jugadores | 30 Minutos por Partida | En Español</p> <!-- Descripción del juego -->
-                    <p class="precio">Precio: $25.000</p> <!-- Precio del juego -->
+    
+    <!-- Producto: 7 Wonders -->
+    {% for producto in productos %}
+    {% if producto.idProducto == 19 %}
+        <div class="categoria">
+            <div class="card-12 card-sm-6 card-md-4">
+                <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                <div class="card-content">
+                    <h2>{{ producto.nombreProducto }}</h2>
+                    <p>{{ producto.descripcionProducto }}</p>
+                    <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                     <!-- Botón de Comprar -->
-                    <button type="button">Comprar</button> <!-- Botón de Comprar -->
-
-                    </a>
-                </div>
-            </div>
+                    <button type="button">Comprar</button> 
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+    {% endif %}
+{% endfor %}
 
         <!-- REDES SOCIALES -->
 

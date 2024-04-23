@@ -184,11 +184,15 @@ button:hover {
 
 /* FOOTER (Parte inferior e iconos de redes) */
 .footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
     background-color: #6d90f7;
     color: #fff;
     padding: 20px;
     text-align: center;
     margin-top: auto;
+    
 }
 
 .social-icons {

@@ -22,23 +22,28 @@ def home(request):
     return render(request, 'aplicacionweb/home.html')
 
 def cooperativo(request):
-    return render(request, 'aplicacionweb/cooperativo.html')
+    productos = Producto.objects.all()
+    return render(request, 'aplicacionweb/cooperativo.html', {'productos': productos})
 
 #! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def deckbuilding(request):
-    return render(request, 'aplicacionweb/deckbuilding.html')
+    productos = Producto.objects.all()
+    return render(request, 'aplicacionweb/deckbuilding.html', {'productos': productos})
 
 #! El segundo boton 'comprar' en eurogames.html se extiende de esquina a esquina
 def eurogames(request):
-    return render(request, 'aplicacionweb/eurogames.html')
+    productos = Producto.objects.all()
+    return render(request, 'aplicacionweb/eurogames.html', {'productos': productos})
 
 #! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def familiar(request):
-    return render(request, 'aplicacionweb/familiar.html')
+    productos = Producto.objects.all()
+    return render(request, 'aplicacionweb/familiar.html', {'productos': productos})
 
 #! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def solitarios(request):
-    return render(request, 'aplicacionweb/solitarios.html')
+    productos = Producto.objects.all()
+    return render(request, 'aplicacionweb/solitarios.html', {'productos': productos})
 
 def iniciarsesion(request):
     return render(request, 'aplicacionweb/iniciar_sesion.html')
@@ -156,13 +161,17 @@ def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
         password = request.POST['contrasena']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
+        if User.objects.filter(username=username).exists():  # Verificar si el usuario existe
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Contraseña incorrecta')
+                return redirect('iniciar_sesion')  # Cambiado aquí
         else:
-            messages.error(request, 'Credenciales de usuario incorrecto')
-            return redirect('iniciar')
+            messages.error(request, 'El usuario no existe')
+            return redirect('iniciar_sesion')  # Cambiado aquí
     else:
         return render(request, 'aplicacionweb/iniciar_sesion.html')
 
