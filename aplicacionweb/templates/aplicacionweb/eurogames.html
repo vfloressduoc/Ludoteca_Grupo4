@@ -55,7 +55,8 @@
         <div class="container border-box">
         <h1>EUROGAMES</h1>
 
-        {% for producto in productos %}
+            <!-- Producto: Brass Birmingham-->
+            {% for producto in productos %}
             {% if producto.idProducto == 23 %}
                 <div class="categoria">
                     <div class="card-12 card-sm-6 card-md-4">
@@ -65,13 +66,17 @@
                             <p>{{ producto.descripcionProducto }}</p>
                             <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                             <!-- Botón de Comprar -->
-                            <button type="button">Comprar</button> 
+                            <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}">
+                                {% csrf_token %}
+                                <button type="submit">Comprar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
-
+        
+        <!-- Producto: Dune Imperium-->
         {% for producto in productos %}
         {% if producto.idProducto == 24 %}
             <div class="categoria">
@@ -82,21 +87,24 @@
                         <p>{{ producto.descripcionProducto }}</p>
                         <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                         <!-- Botón de Comprar -->
-                        <button type="button">Comprar</button> 
+                        <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}">
+                            {% csrf_token %}
+                            <button type="submit">Comprar</button>
+                        </form>
                     </div>
                 </div>
             </div>
         {% endif %}
     {% endfor %}
 
-    <footer class="footer">
+    {% comment %} <footer class="footer">
         <p>@Todos los derechos reservados</p>
         <div class="social-icons">
             <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
             <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
         </div>
-    </footer>
+    </footer> {% endcomment %}
 
 </body>
 

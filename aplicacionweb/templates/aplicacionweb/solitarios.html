@@ -60,52 +60,60 @@
         
         <!-- PRODUCTOS -->
 
+        <!-- 7th Continent-->
         {% for producto in productos %}
-            {% if producto.idProducto == 27 %}
-                <div class="categoria">
-                    <div class="card-12 card-sm-6 card-md-4">
-                        <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
-                        <div class="card-content">
-                            <h2>{{ producto.nombreProducto }}</h2>
-                            <p>{{ producto.descripcionProducto }}</p>
-                            <p class="precio">Precio: ${{ producto.precioProducto }}</p>
-                            <!-- Botón de Comprar -->
-                            <button type="button">Comprar</button> 
-                        </div>
-                    </div>
+    {% if producto.idProducto == 27 %}
+        <div class="categoria">
+            <div class="card-12 card-sm-6 card-md-4">
+                <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                <div class="card-content">
+                    <h2>{{ producto.nombreProducto }}</h2>
+                    <p>{{ producto.descripcionProducto }}</p>
+                    <p class="precio">Precio: ${{ producto.precioProducto }}</p>
+                    <!-- Botón de Comprar -->
+                    <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}" onsubmit="myButton.disabled = true; return true;">
+                        {% csrf_token %}
+                        <button type="submit" id="myButton">Comprar</button>
+                    </form>
                 </div>
-            {% endif %}
-        {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
 
+        <!-- Viernes -->
         {% for producto in productos %}
-            {% if producto.idProducto == 28 %}
-                <div class="categoria">
-                    <div class="card-12 card-sm-6 card-md-4">
-                        <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
-                        <div class="card-content">
-                            <h2>{{ producto.nombreProducto }}</h2>
-                            <p>{{ producto.descripcionProducto }}</p>
-                            <p class="precio">Precio: ${{ producto.precioProducto }}</p>
-                            <!-- Botón de Comprar -->
-                            <button type="button">Comprar</button> 
-                        </div>
+        {% if producto.idProducto == 28 %}
+            <div class="categoria">
+                <div class="card-12 card-sm-6 card-md-4">
+                    <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                    <div class="card-content">
+                        <h2>{{ producto.nombreProducto }}</h2>
+                        <p>{{ producto.descripcionProducto }}</p>
+                        <p class="precio">Precio: ${{ producto.precioProducto }}</p>
+                        <!-- Botón de Comprar -->
+                        <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}" onsubmit="myButton.disabled = true; return true;">
+                            {% csrf_token %}
+                            <button type="submit" id="myButton">Comprar</button>
+                        </form>
                     </div>
                 </div>
-            {% endif %}
-        {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
 
     </div>
 
     <!-- REDES SOCIALES -->
 
-    <footer class="footer">
+    {% comment %} <footer class="footer">
         <p>@Todos los derechos reservados</p>
         <div class="social-icons">
             <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
             <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
         </div>
-    </footer>
+    </footer> {% endcomment %}
 
 </body>
 
