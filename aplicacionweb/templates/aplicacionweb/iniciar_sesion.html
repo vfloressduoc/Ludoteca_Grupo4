@@ -14,29 +14,28 @@
 </head>
 <body>
 
+    <h1 id="title">Iniciar Sesión</h1>
 
-            <h1 id="title">Iniciar Sesión</h1>
-            
-            <!-- *** FORMULARIO *** -->
+    <!-- *** MUESTRA MENSAJES DE ERROR *** -->
+    {% if messages %}
+    <div class="alert alert-danger">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-            <form method="post" action="{% url 'iniciar_sesion' %}">
-                {% csrf_token %}
-                <label for="user">Usuario:</label>
-                <input type="text" id="user" name="user" required>
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-                <input type="submit" value="Iniciar sesión">
-            </form>
+    <!-- *** FORMULARIO *** -->
+    <form method="post" action="{% url 'iniciar_sesion' %}">
+        {% csrf_token %}
+        <label for="user">Usuario:</label>
+        <input type="text" id="user" name="user" required>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        <input type="submit" value="Iniciar sesión">
+    </form>
 
-
-            <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
-
-        
-        
-
-</body>
-</html>
-
+    <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
 
 </body>
 </html>
