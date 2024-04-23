@@ -24,15 +24,19 @@ def home(request):
 def cooperativo(request):
     return render(request, 'aplicacionweb/cooperativo.html')
 
+#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def deckbuilding(request):
     return render(request, 'aplicacionweb/deckbuilding.html')
 
+#! El segundo boton 'comprar' en eurogames.html se extiende de esquina a esquina
 def eurogames(request):
     return render(request, 'aplicacionweb/eurogames.html')
 
+#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def familiar(request):
     return render(request, 'aplicacionweb/familiar.html')
 
+#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
 def solitarios(request):
     return render(request, 'aplicacionweb/solitarios.html')
 
@@ -45,7 +49,13 @@ def registrousuario(request):
 def recuperarcontrasena(request):
     return render(request, 'aplicacionweb/recuperarcontrasena.html')
 
+#*DEFINICION DE CLASES (COMO SE VERÁ LA PAGINA)
+#TODO Organizar las clases de acuerdo a la estructura de la pagina web, quitar las que no esten en uso.
+#TODO Cambiar el nombre de las clases a algo mas descriptivo, ej: 'form_usuario' a 'form_create_usuario'.
+#TODO las html que tienen los productos para ver deberian recurrir a la info de nuestras tablas para mostrarlos y que sea dinamico, no a una imagen o info pegada en el html.
+
 #USUARIO
+#EDITAR DATOS DE UN USUARIO EXISTENTE (Usando 'User' de Django)
 class EditarPerfilForm(UserChangeForm):
     password = None  # No incluir el campo de contraseña en el formulario
     class Meta:
@@ -141,6 +151,7 @@ def reg_clientes(request):
         return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
 
 #INICIO DE SESION
+#! Feedback: Al inciar sesion, si las credenciales son incorrectas, la web se cae, necesitamos un filtro.
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
@@ -178,7 +189,10 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
-    
+
+# RECUPERACION DE CONTRASEÑA
+#TODO Pendiente de implementar la 'recuperacion de contraseña'
+
 # ***** MANIPULAR PRODUCTOS CRUD *****
 
 
@@ -193,6 +207,7 @@ def panel_productos(request):
     return render(request, 'aplicacionweb/panel_productos.html', context)
 
 #CREAR PRODUCTOS
+#TODO Feedback: Solicita un proveedor y una categoria que no aparecen, debemos cambiarlo en models. el tipo de datos a Char para ingresar dato (pendiente a que podria romper algo mas) o intentar que automaticamente inyecte esas categorias.
 def panel_create_productos(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -228,5 +243,7 @@ def form_del_producto(request, id):
     return redirect(to="panel_productos")
 
 
-
+#CARRITO DE COMPRAS
+#TODO Pendiente de implementar la logica del 'carrito de compra'
+#TODO Pendiente de implementar 'orden de compra' luego de comprar un carrito
 
