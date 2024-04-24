@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroGames - Free To Play</title>
+    <link rel="stylesheet" href="{% static '/css/paneladm-style.css' %}">
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+
+</head>
+
+<body>
+<h1>Panel de pedidos</h1>
+{% if pedidos %}
+    <h2>Pedidos registrados</h2>
+{% else %}
+    <p>No tienes ningún pedido registrado.</p>
+{% endif %}
+
+<div class="list-group">
+    {% for pedido in pedidos %}
+        <a href="#" class="list-group-item list-group-item-action mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">ID del pedido: {{ pedido.id }}</h5>
+                    <p class="card-text">Usuario: {{ pedido.usuario.username }}</p>
+                    <p class="card-text">Fecha del pedido: {{ pedido.fecha_pedido }}</p>
+                    <p class="card-text">Productos:</p>
+                    <ul class="mb-3">
+                        {% for productopedido in pedido.pedidoproducto_set.all %}
+                            <li>{{ productopedido.producto.nombre }} - Cantidad: {{ productopedido.cantidad }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form action="{% url 'borrar_pedido' pedido.id %}" method="post" class="mt-3">
+                        {% csrf_token %}
+                        <input type="submit" value="Borrar pedido" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+</div>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludoteca Duoc</title>
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+    
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="col-md-8 offset-md-2">
+            <ul class="list-group">
+                {% for pedido in pedidos %}
+                    <li class="list-group-item">
+                        <h2>Pedido ID: {{ pedido.id }} - Usuario: {{ pedido.usuario.username }}</h2>
+                        <p>Fecha del pedido: {{ pedido.fecha_pedido }}</p>
+                        <table class="table">
+                            <tr>
+                                <th>Nombre del producto</th>
+                                <th>Cantidad</th>
+                            </tr>
+                            {% for pedidoproducto in pedido.pedidoproducto_set.all %}
+                                <tr>
+                                    <td>{{ pedidoproducto.producto.nombreProducto }}</td>
+                                    <td>{{ pedidoproducto.cantidad }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">No tienes ningún pedido registrado.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+
+</body>
+
+<li class="navbar-item"><a href="{%  url 'home' %}" class="navbar-link"><i class="fas fa-home"></i> Inicio</a></li>
+
+
+{% comment %} <footer class="footer">
+    <p>@Todos los derechos reservados</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer> {% endcomment %}
+
+</html>
