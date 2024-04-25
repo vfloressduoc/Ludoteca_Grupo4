@@ -18,16 +18,37 @@
 
     <h1>Mi Carrito</h1>
 
-    {% for carrito_producto in carrito_productos %}
-    <div>
-        <img src="{{ carrito_producto.producto.imagenProducto.url }}" alt="{{ carrito_producto.producto.nombreProducto }}">
-        <h2>{{ carrito_producto.producto.nombreProducto }}</h2>
-        <p>Cantidad: {{ carrito_producto.cantidad }}</p>
-        <p>Precio: ${{ carrito_producto.producto.precioProducto }}</p>
+    {% for item in carrito_productos %}
+    <div class="item">
+        <h2>{{ item.producto.nombreProducto }}</h2>
+        <p>{{ item.producto.descripcionProducto }}</p>
+        <p class="precio">Precio: ${{ item.producto.precioProducto }}</p>
+        <p>Cantidad: {{ item.cantidad }}</p>
+        <div class="botones">
+            <!-- Botón de Quitar -->
+            <form method="post" action="{% url 'quitar_del_carrito' item.producto.idProducto %}" onsubmit="myButton.disabled = true; return true;">
+                {% csrf_token %}
+                <button type="submit" id="myButton">Quitar</button>
+            </form>
+            <!-- Botón de Agregar -->
+            <form method="post" action="{% url 'agregar_al_carrito' item.producto.idProducto %}" onsubmit="myButton2.disabled = true; return true;">
+                {% csrf_token %}
+                <button type="submit" id="myButton2">Agregar</button>
+            </form>
+        </div>
     </div>
 {% empty %}
-    <p>No tienes productos en tu carrito.</p>
+    <p>No hay productos en el carrito.</p>
 {% endfor %}
+
+<p>Total: ${{ total }}</p>
+
+<!-- Botón de Realizar Compra -->
+<form method="post" action="{% url 'realizar_compra' %}">
+    {% csrf_token %}
+    <button type="submit" {% if not carrito_productos %}disabled{% endif %}>Realizar Compra</button>
+</form>
+
 
 
 
@@ -63,13 +84,13 @@
 <li class="navbar-item"><a href="{%  url 'home' %}" class="navbar-link"><i class="fas fa-home"></i> Inicio</a></li>
 
 
-<footer class="footer">
+{% comment %} <footer class="footer">
     <p>@Todos los derechos reservados</p>
     <div class="social-icons">
         <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
         <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
         <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
     </div>
-</footer>
+</footer> {% endcomment %}
 
 </html>

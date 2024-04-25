@@ -16,17 +16,23 @@
 
 <body>
 
-    <a href="{%  url 'carrito_compras' %}"><button>carrito</button></a>
-
     <div class="button-container">
 
         {% if user.is_superuser %}
-            <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
-            <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
-        {% endif %}
+    <a href="{%  url 'panel_moderacion' %}">
+        <button class="admin-button">USERS ADMIN</button>
+    </a>
+    <a href="{%  url 'panel_productos' %}">
+        <button class="admin-button">PRODUCTOS ADMIN</button>
+    </a>
+    <a href="{%  url 'panel_pedidos' %}">
+        <button class="admin-button">PEDIDOS ADMIN</button>
+    {% endif %}
     
         {% if user.is_authenticated %}
             <div>
+                <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
+                <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
                 <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
                 <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
                 <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
@@ -35,6 +41,7 @@
             <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
             <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
         {% endif %}
+
     </div>
 
 

@@ -29,6 +29,13 @@ from .views import form_del_producto
 
 from .views import agregar_al_carrito
 from .views import carrito_compras
+from .views import quitar_del_carrito
+from .views import ordenes_compra
+from .views import ver_pedidos
+from .views import realizar_compra
+from .views import ver_todos_pedidos
+from .views import panel_pedidos
+from .views import borrar_pedido
 
 
 
@@ -58,5 +65,12 @@ urlpatterns = [
     path('form_del_producto/<id>', form_del_producto, name='form_del_producto'),
     path('agregar_al_carrito/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito_compras/', carrito_compras, name='carrito_compras'),
+    path('quitar_del_carrito/<int:producto_id>/', views.quitar_del_carrito, name='quitar_del_carrito'),
+    path('ordenes_compra/', views.ordenes_compra, name='ordenes_compra'),
+    path('realizar_compra/', views.realizar_compra, name='realizar_compra'),
+    path('ver_pedidos/', views.ver_pedidos, name='ver_pedidos'),
+    path('ver_todos_pedidos/', views.ver_todos_pedidos, name='ver_todos_pedidos'),
+    path('panel_pedidos/', views.panel_pedidos, name='panel_pedidos'),
+    path('borrar_pedido/<int:pedido_id>/', views.borrar_pedido, name='borrar_pedido'),
 ] 
 

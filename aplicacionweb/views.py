@@ -12,7 +12,9 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from .forms import ProductoForm
 from .models import Producto, Carrito, CarritoProducto
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Pedido
+from .models import PedidoProducto
 
 
 
@@ -20,6 +22,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #VISTAS GENERALES
+#? En algun momento se rompio el CSS de nuestra web o yo veo los colores distintos? 
+#! Intento cambiar algo en el css de home porque veo los colores de fondo diferentes y las cosas se desalinean y no me responde. Arreglar diseños
 def home(request):
     return render(request, 'aplicacionweb/home.html')
 
@@ -27,22 +31,22 @@ def cooperativo(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/cooperativo.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def deckbuilding(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/deckbuilding.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en eurogames.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def eurogames(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/eurogames.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def familiar(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/familiar.html', {'productos': productos})
 
-#! El segundo boton 'comprar' en deckbuilding.html se extiende de esquina a esquina
+#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def solitarios(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/solitarios.html', {'productos': productos})
@@ -59,7 +63,6 @@ def recuperarcontrasena(request):
 #*DEFINICION DE CLASES (COMO SE VERÁ LA PAGINA)
 #TODO Organizar las clases de acuerdo a la estructura de la pagina web, quitar las que no esten en uso.
 #TODO Cambiar el nombre de las clases a algo mas descriptivo, ej: 'form_usuario' a 'form_create_usuario'.
-#TODO las html que tienen los productos para ver deberian recurrir a la info de nuestras tablas para mostrarlos y que sea dinamico, no a una imagen o info pegada en el html.
 
 #USUARIO
 #EDITAR DATOS DE UN USUARIO EXISTENTE (Usando 'User' de Django)
@@ -256,8 +259,9 @@ def form_del_producto(request, id):
 
 #CARRITO DE COMPRAS
 
-#BOTON PARA AGREGAR ITEM A CARRITO
-#!Si no estas logeado se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados"
+#DEF PARA AGREGAR ITEM A CARRITO (Se usa tanto para el boton comprar como para aumentar la cantidad de un item en el carrito)
+#!Si no estas logeado y das al carrito se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados", por el mmento solo lo pueden ver registrado pero no se si pueden entrar via "/direccion"
+
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, idProducto=producto_id)
@@ -273,8 +277,63 @@ def agregar_al_carrito(request, producto_id):
 def carrito_compras(request):
     carrito = get_object_or_404(Carrito, usuario=request.user)
     carrito_productos = CarritoProducto.objects.filter(carrito=carrito)
-    return render(request, 'aplicacionweb/carrito_compras.html', {'carrito_productos': carrito_productos})
+    total = sum(item.producto.precioProducto * item.cantidad for item in carrito_productos)
+    return render(request, 'aplicacionweb/carrito_compras.html', {'carrito_productos': carrito_productos, 'total': total})
 
-#TODO Pendiente de implementar la logica del 'carrito de compra'
-#TODO Pendiente de implementar 'orden de compra' luego de comprar un carrito
+#QUITAR ITEM DEL CARRITO
+@login_required
+def quitar_del_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, idProducto=producto_id)
+    carrito = get_object_or_404(Carrito, usuario=request.user)
+    carrito_producto = get_object_or_404(CarritoProducto, carrito=carrito, producto=producto)
+    if carrito_producto.cantidad > 1:
+        carrito_producto.cantidad -= 1
+        carrito_producto.save()
+    else:
+        carrito_producto.delete()
+    return redirect('carrito_compras')
 
+@login_required
+def ordenes_compra(request):
+    pedidos = Pedido.objects.filter(usuario=request.user).order_by('-fecha_pedido')
+    return render(request, 'aplicacionweb/ordenes_compra.html', {'pedidos': pedidos})
+
+#REALIZAR COMPRA
+@login_required
+def realizar_compra(request):
+    carrito = get_object_or_404(Carrito, usuario=request.user)
+    pedido = Pedido.objects.create(usuario=request.user)
+    for carrito_producto in carrito.carritoproducto_set.all():
+        PedidoProducto.objects.create(
+            pedido=pedido,
+            producto=carrito_producto.producto,
+            cantidad=carrito_producto.cantidad
+        )
+    carrito.carritoproducto_set.all().delete()
+    return redirect('ordenes_compra')
+
+#! "@login_required" antes del def es para que personas logeadas solamente puedan usarlo, pero algunas def no me permitian anteponerlo, no reconocia la def si lo hacia.
+#VER PEDIDOS REALIZADOS
+def ver_pedidos(request):
+    pedidos = Pedido.objects.filter(usuario=request.user)
+    return render(request, 'ver_pedidos.html', {'pedidos': pedidos})
+
+#PANEL PEDIDOS PARA ADMINISTRADORES
+def panel_pedidos(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'aplicacionweb/panel_pedidos.html', {'pedidos': pedidos})
+
+#VER TODOS LOS PEDIDOS EN LA TABLA DE PEDIDOS (NO SOLO DEL USUARIO LOGEADO)
+def ver_todos_pedidos(request):
+    if request.user.is_superuser:  # Asegurarse de que solo los superusuarios pueden ver todos los pedidos
+        pedidos = Pedido.objects.all()
+        return render(request, 'panel_pedidos.html', {'pedidos': pedidos})
+    else:
+        return render(request, 'error.html', {'mensaje': 'No tienes permiso para ver esta página.'})
+
+#BORRAR PEDIDO
+def borrar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+    if request.user.is_superuser:  # Solo los superusuarios pueden borrar pedidos
+        pedido.delete()
+    return redirect('panel_pedidos')

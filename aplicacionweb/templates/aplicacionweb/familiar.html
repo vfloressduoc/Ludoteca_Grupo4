@@ -15,29 +15,32 @@
 
 <body>
 
-        <!-- BOTONES DE CABECERA  -->
-
     <div class="button-container">
 
         {% if user.is_superuser %}
-            <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
-            <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
+    <a href="{%  url 'panel_moderacion' %}">
+        <button class="admin-button">USERS ADMIN</button>
+    </a>
+    <a href="{%  url 'panel_productos' %}">
+        <button class="admin-button">PRODUCTOS ADMIN</button>
+    </a>
+    <a href="{%  url 'panel_pedidos' %}">
+        <button class="admin-button">PEDIDOS ADMIN</button>
+    {% endif %}
+    
+        {% if user.is_authenticated %}
+            <div>
+                <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
+                <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
+                <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+                <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+                <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
+            </div>
+        {% else %}
+            <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+            <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
         {% endif %}
 
-        {% if user.is_authenticated %}
-        <div>
-            <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-            <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-            <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
-
-        </div>
-
-{% else %}
-
-    <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
-    <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
-
-{% endif %}
     </div>
 
     <!-- CATEGORIAS -->
@@ -62,21 +65,24 @@
         
         <!-- Producto: Dixit -->
         {% for producto in productos %}
-        {% if producto.idProducto == 20 %}
-            <div class="categoria">
-                <div class="card-12 card-sm-6 card-md-4">
-                    <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
-                    <div class="card-content">
-                        <h2>{{ producto.nombreProducto }}</h2>
-                        <p>{{ producto.descripcionProducto }}</p>
-                        <p class="precio">Precio: ${{ producto.precioProducto }}</p>
-                        <!-- Botón de Comprar -->
-                        <button type="button">Comprar</button> 
+            {% if producto.idProducto == 20 %}
+                <div class="categoria">
+                    <div class="card-12 card-sm-6 card-md-4">
+                        <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                        <div class="card-content">
+                            <h2>{{ producto.nombreProducto }}</h2>
+                            <p>{{ producto.descripcionProducto }}</p>
+                            <p class="precio">Precio: ${{ producto.precioProducto }}</p>
+                            <!-- Botón de Comprar -->
+                            <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}">
+                                {% csrf_token %}
+                                <button type="submit">Comprar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+            {% endif %}
+        {% endfor %}
             
     
     <!-- Producto: 7 Wonders -->
@@ -90,7 +96,10 @@
                     <p>{{ producto.descripcionProducto }}</p>
                     <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                     <!-- Botón de Comprar -->
-                    <button type="button">Comprar</button> 
+                    <form method="post" action="{% url 'agregar_al_carrito' producto.idProducto %}" onsubmit="myButton.disabled = true; return true;">
+                        {% csrf_token %}
+                        <button type="submit" id="myButton">Comprar</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -99,14 +108,14 @@
 
         <!-- REDES SOCIALES -->
 
-    <footer class="footer">
+    {% comment %} <footer class="footer">
         <p>@Todos los derechos reservados</p>
         <div class="social-icons">
             <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
             <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
         </div>
-    </footer>
+    </footer> {% endcomment %}
 
 
 </body>
