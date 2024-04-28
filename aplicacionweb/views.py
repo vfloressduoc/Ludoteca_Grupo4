@@ -17,6 +17,13 @@ from .models import Pedido
 from .models import PedidoProducto
 from .models import UserProfile
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import SetPasswordForm
+
+
+
 # Create your views here.
 
 #VISTAS GENERALES
@@ -366,3 +373,47 @@ def borrar_pedido(request, pedido_id):
     if request.user.is_superuser:  # Solo los superusuarios pueden borrar pedidos
         pedido.delete()
     return redirect('panel_pedidos')
+
+#RECUPERAR CONTRASEÑA
+def recuperar_contrasena(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        palabra_clave = request.POST['palabra_clave']
+
+        try:
+            user = User.objects.get(email=email)
+            user_profile = UserProfile.objects.get(user=user, palabra_clave=palabra_clave)
+            return redirect('cambiar_contrasena', user_id=user.id)
+        except ObjectDoesNotExist:
+            return render(request, 'aplicacionweb/recuperar_contrasena.html', {'error': 'No existe un usuario con ese correo electrónico y palabra clave.'})
+
+    return render(request, 'aplicacionweb/recuperar_contrasena.html')
+    
+#CAMBIOA ACEPTADO   
+class SetPasswordFormWithoutOldPassword(SetPasswordForm):
+    def __init__(self, user, *args, **kwargs):
+        super(SetPasswordFormWithoutOldPassword, self).__init__(user, *args, **kwargs)
+        if 'old_password' in self.fields:
+            del self.fields['old_password']
+
+    def clean_old_password(self):
+        # No hacer nada en este método
+        pass
+
+from django.contrib.auth.decorators import login_required
+
+def cambiar_contrasena(request, user_id):
+    if request.user.is_authenticated:
+        # Si el usuario está conectado, redirigir a la página de inicio
+        return redirect('home')
+
+    user = User.objects.get(id=user_id)
+    if request.method == 'POST':
+        form = SetPasswordFormWithoutOldPassword(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Importante, para que el usuario no sea desconectado
+            return redirect('home')
+    else:
+        form = SetPasswordFormWithoutOldPassword(user)
+    return render(request, 'aplicacionweb/cambiar_contrasena.html', {'form': form})
