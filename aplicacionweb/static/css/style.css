@@ -1,9 +1,11 @@
+
 *{
     margin: 0;
     padding: 0;
 }
     
 body {
+    background-image: url("/Img/fondowebpale.png");
     color: rgb(45, 45, 45); 
     background-color: rgb(174, 231, 255);
     background-size: cover;

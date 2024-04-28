@@ -1,0 +1,115 @@
+body {
+    background-image: url('/static/Img/fondowebpale.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Estilos para los botones */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* DAR EFECTO A LOS BOTONES */
+
+
+/* Estilos para el logo */
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+}
+
+.navbar-list {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-item .navbar-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.navbar-item .navbar-link:hover {
+    color: rgb(255, 114, 246); /* Esto hará que el color del enlace cambie a rosa cuando se pase el mouse por encima */
+}
+
+/* Estilos para las tarjetas */
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 10px;
+}
+
+.column-1 { grid-column: span 1; }
+.column-2 { grid-column: span 2; }
+.column-3 { grid-column: span 3; }
+.column-4 { grid-column: span 4; }
+.column-5 { grid-column: span 5; }
+.column-6 { grid-column: span 6; }
+.column-7 { grid-column: span 7; }
+.column-8 { grid-column: span 8; }
+.column-9 { grid-column: span 9; }
+.column-10 { grid-column: span 10; }
+.column-11 { grid-column: span 11; }
+.column-12 { grid-column: span 12; }
+
+.card-12 {
+    flex: 1 0 100%;
+    max-width: 100%;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-sm-6 {
+    flex: 1 0 50%;
+    max-width: 50%;
+}
+
+.card-md-4 {
+    flex: 1 0 33.33%;
+    max-width: 33.33%;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+/* Estilos para el pie de página */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+footer {
+    flex-shrink: 0; /* Esto evitará que el footer se reduzca y se mantenga en la parte inferior de la página */
+}

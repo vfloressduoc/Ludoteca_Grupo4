@@ -174,15 +174,20 @@ def form_del_usuario(request, id):
 #REGISTRO COMO CLIENTE (Usando 'User' de Django)
 def reg_clientes(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = CustomUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            UserProfile.objects.create(user=user, avatar=profile_form.cleaned_data['avatar'], palabra_clave=profile_form.cleaned_data['palabra_clave'])
             return redirect('home')
         else:
-            return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
+            context = {'user_form': user_form, 'profile_form': profile_form}
+            return render(request, 'aplicacionweb/reg_clientes.html', context)
     else:
-        form = CustomUserCreationForm()
-        return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
+        user_form = CustomUserCreationForm()
+        profile_form = UserProfileForm()
+        context = {'user_form': user_form, 'profile_form': profile_form}
+        return render(request, 'aplicacionweb/reg_clientes.html', context)
 
 #INICIO DE SESION
 #! Feedback: Al ingresar un usuario incorrecto y posteriormente una contraseña incorrecta, persiste el mensaje "usuario incorrecto" y viseversa, se debe limpiar
