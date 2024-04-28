@@ -87,3 +87,9 @@ class Pedido(models.Model):
         return f'Pedido {self.id} - {self.usuario.username}'
 
 
+#Vamos a usar esto para extender una tabla hacia User, para que adhiera dos campos: palabra clave para recuperar contraseña y un avatar
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    palabra_clave = models.CharField(max_length=100)
+    

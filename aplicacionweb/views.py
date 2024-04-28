@@ -15,7 +15,12 @@ from .models import Producto, Carrito, CarritoProducto
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Pedido
 from .models import PedidoProducto
+from .models import UserProfile
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import SetPasswordForm
 
 
 
@@ -98,25 +103,45 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     is_superuser = forms.BooleanField(required=False)
+    avatar = forms.ImageField(required=False)  # Nuevo campo
+    palabra_clave = forms.CharField(max_length=100, required=False)  # Nuevo campo
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', )
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', 'avatar', 'palabra_clave') 
+
+
+class UserProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False)
+    palabra_clave = forms.CharField(max_length=100, required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('avatar', 'palabra_clave')
 
 def form_usuario(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        
-        if form.is_valid():
-            user = form.save()
-            form = CustomUserCreationForm()  # Crea una nueva instancia del formulario
-            datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
+        user_form = CustomUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            user_form = CustomUserCreationForm()
+            profile_form = UserProfileForm()
+
+            datos = {'user_form': user_form, 'profile_form': profile_form, 'mensaje': "Usuario guardado exitosamente"}
         else:
-            datos = {'form': form}
+            datos = {'user_form': user_form, 'profile_form': profile_form}
     else:
-        form = CustomUserCreationForm()
-        datos = {'form': form}
-            
+        user_form = CustomUserCreationForm()
+        profile_form = UserProfileForm()
+        datos = {'user_form': user_form, 'profile_form': profile_form}
+
     return render(request, 'aplicacionweb/form_usuario.html', datos)
             
 
@@ -127,15 +152,21 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'first_name', 'last_name', 'is_superuser', )
 
 def form_mod_usuario(request, id):
-    usuario = User.objects.get(id=id)
+    usuario = get_object_or_404(User, id=id)
+    profile, created = UserProfile.objects.get_or_create(user=usuario)
+    
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            form.save()
-            return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form, 'mensaje': 'Usuario modificado correctamente'})
+        user_form = CustomUserChangeForm(request.POST, instance=usuario)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, 'aplicacionweb/form_mod_usuario.html', {'user_form': user_form, 'profile_form': profile_form, 'mensaje': 'Usuario modificado correctamente'})
     else:
-        form = CustomUserChangeForm(instance=usuario)
-        return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form})
+        user_form = CustomUserChangeForm(instance=usuario)
+        profile_form = UserProfileForm(instance=profile)
+        return render(request, 'aplicacionweb/form_mod_usuario.html', {'user_form': user_form, 'profile_form': profile_form})
     
 
 #ELIMINAR UN USUARIO (Usando 'User' de Django)
@@ -150,15 +181,20 @@ def form_del_usuario(request, id):
 #REGISTRO COMO CLIENTE (Usando 'User' de Django)
 def reg_clientes(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = CustomUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            UserProfile.objects.create(user=user, avatar=profile_form.cleaned_data['avatar'], palabra_clave=profile_form.cleaned_data['palabra_clave'])
             return redirect('home')
         else:
-            return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
+            context = {'user_form': user_form, 'profile_form': profile_form}
+            return render(request, 'aplicacionweb/reg_clientes.html', context)
     else:
-        form = CustomUserCreationForm()
-        return render(request, 'aplicacionweb/reg_clientes.html', {'form': form})
+        user_form = CustomUserCreationForm()
+        profile_form = UserProfileForm()
+        context = {'user_form': user_form, 'profile_form': profile_form}
+        return render(request, 'aplicacionweb/reg_clientes.html', context)
 
 #INICIO DE SESION
 #! Feedback: Al ingresar un usuario incorrecto y posteriormente una contraseña incorrecta, persiste el mensaje "usuario incorrecto" y viseversa, se debe limpiar
@@ -220,7 +256,7 @@ def panel_productos(request):
     
     return render(request, 'aplicacionweb/panel_productos.html', context)
 
-#CREAR PRODUCTOS
+#** CREAR PRODUCTOS
 #TODO Feedback: Solicita un proveedor y una categoria que no aparecen, debemos cambiarlo en models. el tipo de datos a Char para ingresar dato (pendiente a que podria romper algo mas) o intentar que automaticamente inyecte esas categorias.
 def panel_create_productos(request):
     if request.method == 'POST':
@@ -261,7 +297,7 @@ def form_del_producto(request, id):
 
 #DEF PARA AGREGAR ITEM A CARRITO (Se usa tanto para el boton comprar como para aumentar la cantidad de un item en el carrito)
 #!Si no estas logeado y das al carrito se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados", por el mmento solo lo pueden ver registrado pero no se si pueden entrar via "/direccion"
-
+#!Si no tienes elementos en el carrito y estas logeado se cae al hacer clic en el
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, idProducto=producto_id)
@@ -337,3 +373,47 @@ def borrar_pedido(request, pedido_id):
     if request.user.is_superuser:  # Solo los superusuarios pueden borrar pedidos
         pedido.delete()
     return redirect('panel_pedidos')
+
+#RECUPERAR CONTRASEÑA
+def recuperar_contrasena(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        palabra_clave = request.POST['palabra_clave']
+
+        try:
+            user = User.objects.get(email=email)
+            user_profile = UserProfile.objects.get(user=user, palabra_clave=palabra_clave)
+            return redirect('cambiar_contrasena', user_id=user.id)
+        except ObjectDoesNotExist:
+            return render(request, 'aplicacionweb/recuperar_contrasena.html', {'error': 'No existe un usuario con ese correo electrónico y palabra clave.'})
+
+    return render(request, 'aplicacionweb/recuperar_contrasena.html')
+    
+#CAMBIOA ACEPTADO   
+class SetPasswordFormWithoutOldPassword(SetPasswordForm):
+    def __init__(self, user, *args, **kwargs):
+        super(SetPasswordFormWithoutOldPassword, self).__init__(user, *args, **kwargs)
+        if 'old_password' in self.fields:
+            del self.fields['old_password']
+
+    def clean_old_password(self):
+        # No hacer nada en este método
+        pass
+
+from django.contrib.auth.decorators import login_required
+
+def cambiar_contrasena(request, user_id):
+    if request.user.is_authenticated:
+        # Si el usuario está conectado, redirigir a la página de inicio
+        return redirect('home')
+
+    user = User.objects.get(id=user_id)
+    if request.method == 'POST':
+        form = SetPasswordFormWithoutOldPassword(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Importante, para que el usuario no sea desconectado
+            return redirect('home')
+    else:
+        form = SetPasswordFormWithoutOldPassword(user)
+    return render(request, 'aplicacionweb/cambiar_contrasena.html', {'form': form})

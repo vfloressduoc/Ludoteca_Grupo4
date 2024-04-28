@@ -6,7 +6,7 @@
 
 body {
     color: #000000; 
-    background-color: #87CEFA; 
+    background-image: url('/static/Img/fondowebpale.png');
     background-size: cover;
     background-repeat: repeat;
     font-family: Arial, sans-serif; 

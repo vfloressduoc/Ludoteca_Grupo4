@@ -36,6 +36,8 @@ from .views import realizar_compra
 from .views import ver_todos_pedidos
 from .views import panel_pedidos
 from .views import borrar_pedido
+from .views import recuperar_contrasena
+from .views import cambiar_contrasena
 
 
 
@@ -72,5 +74,6 @@ urlpatterns = [
     path('ver_todos_pedidos/', views.ver_todos_pedidos, name='ver_todos_pedidos'),
     path('panel_pedidos/', views.panel_pedidos, name='panel_pedidos'),
     path('borrar_pedido/<int:pedido_id>/', views.borrar_pedido, name='borrar_pedido'),
-] 
-
+    path('recuperar_contrasena/', views.recuperar_contrasena, name='recuperar_contrasena'),
+    path('cambiar_contrasena/<int:user_id>/', cambiar_contrasena, name='cambiar_contrasena'),
+]

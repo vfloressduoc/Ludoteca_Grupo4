@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es' #Cambie el idioma a español, para los mensajes que envia el registro de usuario,
 
 TIME_ZONE = 'UTC'
 

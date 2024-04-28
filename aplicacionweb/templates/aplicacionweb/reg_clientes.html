@@ -7,31 +7,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/panelformularios-users.css' %}">
+    <link rel="stylesheet" href="{% static '/css/forms-style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
 
 <body>
-<img src="{% static '/Img/iconopeon.png' %}" alt="DATABASE USUARIOS">
-<h3>Creacion de usuario</h3>
-
-<div class='row'>
-    <form method='post' action="" id="form">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_table }}
-        </div>
-
-        <input type="submit" class="btn btn-danger" id="enviar" value="Registrarse">
-        <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
-        <div id="error" class="alert alert-danger" role="alert"></div>
-    </form>
-</div>
-
-<div class="alert alert-success" role="alert">
-    {{ mensaje }}
-</div>
+    <h3>Creacion de usuario</h3>
+    
+    <div class='row'>
+        <form method='post' action="" id="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ user_form.as_table }}
+                {{ profile_form.as_table }}
+            </div>
+    
+            <input type="submit" class="btn btn-danger" id="enviar" value="Registrarse">
+            <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
+            <div id="error" class="alert alert-danger" role="alert"></div>
+        </form>
+    </div>
+    
+    <div class="alert alert-success" role="alert">
+        {{ mensaje }}
+    </div>
 
 
 
