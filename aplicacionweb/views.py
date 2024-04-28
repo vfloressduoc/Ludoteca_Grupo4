@@ -15,9 +15,7 @@ from .models import Producto, Carrito, CarritoProducto
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Pedido
 from .models import PedidoProducto
-
-
-
+from .models import UserProfile
 
 # Create your views here.
 
@@ -98,25 +96,45 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     is_superuser = forms.BooleanField(required=False)
+    avatar = forms.ImageField(required=False)  # Nuevo campo
+    palabra_clave = forms.CharField(max_length=100, required=False)  # Nuevo campo
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', )
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', 'avatar', 'palabra_clave') 
+
+
+class UserProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False)
+    palabra_clave = forms.CharField(max_length=100, required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('avatar', 'palabra_clave')
 
 def form_usuario(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        
-        if form.is_valid():
-            user = form.save()
-            form = CustomUserCreationForm()  # Crea una nueva instancia del formulario
-            datos = {'form': form, 'mensaje': "Usuario guardado exitosamente"}
+        user_form = CustomUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            user_form = CustomUserCreationForm()
+            profile_form = UserProfileForm()
+
+            datos = {'user_form': user_form, 'profile_form': profile_form, 'mensaje': "Usuario guardado exitosamente"}
         else:
-            datos = {'form': form}
+            datos = {'user_form': user_form, 'profile_form': profile_form}
     else:
-        form = CustomUserCreationForm()
-        datos = {'form': form}
-            
+        user_form = CustomUserCreationForm()
+        profile_form = UserProfileForm()
+        datos = {'user_form': user_form, 'profile_form': profile_form}
+
     return render(request, 'aplicacionweb/form_usuario.html', datos)
             
 
@@ -127,15 +145,21 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'first_name', 'last_name', 'is_superuser', )
 
 def form_mod_usuario(request, id):
-    usuario = User.objects.get(id=id)
+    usuario = get_object_or_404(User, id=id)
+    profile, created = UserProfile.objects.get_or_create(user=usuario)
+    
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            form.save()
-            return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form, 'mensaje': 'Usuario modificado correctamente'})
+        user_form = CustomUserChangeForm(request.POST, instance=usuario)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, 'aplicacionweb/form_mod_usuario.html', {'user_form': user_form, 'profile_form': profile_form, 'mensaje': 'Usuario modificado correctamente'})
     else:
-        form = CustomUserChangeForm(instance=usuario)
-        return render(request, 'aplicacionweb/form_mod_usuario.html', {'form': form})
+        user_form = CustomUserChangeForm(instance=usuario)
+        profile_form = UserProfileForm(instance=profile)
+        return render(request, 'aplicacionweb/form_mod_usuario.html', {'user_form': user_form, 'profile_form': profile_form})
     
 
 #ELIMINAR UN USUARIO (Usando 'User' de Django)
@@ -220,7 +244,7 @@ def panel_productos(request):
     
     return render(request, 'aplicacionweb/panel_productos.html', context)
 
-#CREAR PRODUCTOS
+#** CREAR PRODUCTOS
 #TODO Feedback: Solicita un proveedor y una categoria que no aparecen, debemos cambiarlo en models. el tipo de datos a Char para ingresar dato (pendiente a que podria romper algo mas) o intentar que automaticamente inyecte esas categorias.
 def panel_create_productos(request):
     if request.method == 'POST':

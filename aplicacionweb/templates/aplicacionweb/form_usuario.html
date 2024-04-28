@@ -17,10 +17,11 @@
 <h3>Creacion de usuario</h3>
 
 <div class='row'>
-    <form method='post' action="" id="form">
+    <form method='post' action="" id="form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            {{ form.as_table }}
+            {{ user_form.as_table }}
+            {{ profile_form.as_table }}
         </div>
 
         <input type="submit" class="btn btn-danger" id="enviar" value="Enviar">
@@ -32,7 +33,6 @@
 <div class="alert alert-success" role="alert">
     {{ mensaje }}
 </div>
-
 
 
 

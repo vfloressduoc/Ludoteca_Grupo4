@@ -31,6 +31,8 @@
                     <th scope='col'>Nombre</th>
                     <th scope='col'>Apellido</th>
                     <th scope='col'>Nombre de usuario</th>
+                    <th scope='col'>Avatar</th>  <!-- Nueva columna -->
+                    <th scope='col'>Palabra clave</th>  <!-- Nueva columna -->
                     <th scope='col'>Opciones</th>
                 </tr>
             </thead>
@@ -43,6 +45,14 @@
                     <td>{{ usuario.first_name }}</td>
                     <td>{{ usuario.last_name }}</td>
                     <td>{{ usuario.username }}</td>
+                    <td>
+                        {% if usuario.userprofile.avatar and usuario.userprofile.avatar.url %}
+                            <img src="{{ usuario.userprofile.avatar.url }}" alt="Avatar" width="50" height="50">
+                        {% else %}
+                            Sin avatar
+                        {% endif %}
+                    </td>  <!-- Nueva celda -->
+                    <td>{{ usuario.userprofile.palabra_clave }}</td>  <!-- Nueva celda -->
                     <td><a href="{% url 'form_mod_usuario' usuario.id %}">Modificar</a></td>
                     <td><a href="{% url 'form_del_usuario' usuario.id %}">Eliminar</a></td>
                 </tr>
@@ -52,7 +62,6 @@
     </div>
 </div>
 
-    
 {% endblock contenido %}
 
 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
