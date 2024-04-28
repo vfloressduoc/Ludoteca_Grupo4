@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aplicacionweb',
+    'rest_framework',
+    'rest_api',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -97,6 +100,12 @@ DATABASES = {
     }
 }
 
+#token de autentificacion para poder acceder al api rest de la aplicacion.
+REST_FRAMEKWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
