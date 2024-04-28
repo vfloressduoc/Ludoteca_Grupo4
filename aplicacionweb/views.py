@@ -297,7 +297,7 @@ def form_del_producto(request, id):
 
 #DEF PARA AGREGAR ITEM A CARRITO (Se usa tanto para el boton comprar como para aumentar la cantidad de un item en el carrito)
 #!Si no estas logeado y das al carrito se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados", por el mmento solo lo pueden ver registrado pero no se si pueden entrar via "/direccion"
-
+#!Si no tienes elementos en el carrito y estas logeado se cae al hacer clic en el
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, idProducto=producto_id)
