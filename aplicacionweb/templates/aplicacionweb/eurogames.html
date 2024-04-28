@@ -16,6 +16,8 @@
 
     <div class="button-container">
 
+
+
         {% if user.is_superuser %}
     <a href="{%  url 'panel_moderacion' %}">
         <button class="admin-button">USERS ADMIN</button>
@@ -27,19 +29,30 @@
         <button class="admin-button">PEDIDOS ADMIN</button>
     {% endif %}
     
-        {% if user.is_authenticated %}
-            <div>
-                <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
-                <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
-                <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-                <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-                <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
-            </div>
-        {% else %}
-            <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
-            <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
-        {% endif %}
-
+    {% if user.is_authenticated %}
+    <div>
+        <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
+        <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
+        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+        <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
+        <div style="margin-top: 20px; margin-left: 600px;"> <!-- Esta linea mueve a los lados el avatar y msj -->
+            {% if user.userprofile.avatar %}
+                <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}'s avatar" style="width: 100px; height: 100px;">
+            {% else %}
+                <img src="{% static '/Img/OIG4.jpg' %}" alt="Default avatar" style="width: 100px; height: 100px;">
+            {% endif %}
+            <h3 style="margin-left: -10px;">
+                ¡Bienvenido {{ user.username }}!
+            </h3>
+        </div>
+    </div>
+{% else %}
+    <div class="button-container">
+        <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
+        <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
+    </div>
+{% endif %}
+    
     </div>
 
 

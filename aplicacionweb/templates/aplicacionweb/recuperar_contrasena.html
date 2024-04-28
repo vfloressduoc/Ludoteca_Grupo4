@@ -1,3 +1,18 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludoteca Duoc - Solitarios</title>
+    <link rel="stylesheet" href="{% static '/css/website-style.css' %}">
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+
+</head>
+
 
 {% block content %}
   <h2>Recuperar contraseña</h2>
@@ -15,3 +30,7 @@
 {% endblock %}
 
 <a href="{% url 'home' %}" class="btn">Regresar a HOME</a>
+
+</body>
+
+</html>
