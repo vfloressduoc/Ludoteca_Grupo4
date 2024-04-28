@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 #NOTA: Para las imagenes tuve que instalar "python -m pip install Pillow" para que funcionara
 
 # #CLASE DE USUARIO (esta tabla se puede quitar si se desea, ya que se esta usando la tabla User de Django)
-#! Segun yo, no estamos usando esta tabla, sin embargo no me permite sacarla
 class Usuario(models.Model):
     email = models.EmailField(max_length=200, verbose_name='Email', unique=True, primary_key=True)
     nombre = models.CharField(max_length=50, verbose_name='Nombre')
@@ -86,6 +85,7 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f'Pedido {self.id} - {self.usuario.username}'
+
 
 #Vamos a usar esto para extender una tabla hacia User, para que adhiera dos campos: palabra clave para recuperar contraseña y un avatar
 class UserProfile(models.Model):
