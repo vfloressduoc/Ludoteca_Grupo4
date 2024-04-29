@@ -26,7 +26,7 @@
     {% endif %}
 
     <!-- *** FORMULARIO *** -->
-    <form method="post" action="{% url 'iniciar_sesion' %}">
+    <form method="post" action="{% url 'iniciar_sesion' %}" onsubmit="submitButton.disabled = true; return true;">
         {% csrf_token %}
         <fieldset>
             <legend>Iniciar Sesión</legend>
@@ -38,12 +38,12 @@
                 <label for="contrasena" class="form-label">Contraseña:</label>
                 <input type="password" id="contrasena" name="contrasena" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            <button type="submit" id="submitButton" class="btn btn-primary">Iniciar sesión</button>
         </fieldset>
     </form>
 
-    <a href="{% url 'recuperar_contrasena' %}" class="btn btn-primary">Recuperar Contraseña</a>
-    <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
+    <a href="{% url 'recuperar_contrasena' %}" class="btn btn-primary" onclick="this.disabled = true; return true;">Recuperar Contraseña</a>
+    <a href="{% url 'home' %}" class="btn" onclick="this.disabled = true; return true;"><i class="fas fa-home"></i> Regresar a HOME</a>
 
 </body>
 </html>

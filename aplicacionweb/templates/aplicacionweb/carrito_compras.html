@@ -10,6 +10,12 @@
 
     <link rel="stylesheet" href="{% static '/css/carrito-style.css' %}">
 
+    <style>
+        .item-info {
+            width: 200px;  /* Ajusta este valor según tus necesidades */
+        }
+    </style>
+
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
     
 </head>
@@ -20,10 +26,9 @@
 
     {% for item in carrito_productos %}
     <div class="item">
-        <h2>{{ item.producto.nombreProducto }}</h2>
-        <p>{{ item.producto.descripcionProducto }}</p>
-        <p class="precio">Precio: ${{ item.producto.precioProducto }}</p>
-        <p>Cantidad: {{ item.cantidad }}</p>
+        <h2 class="item-info">{{ item.producto.nombreProducto }}</h2>
+        <p class="item-info precio">Precio: ${{ item.producto.precioProducto }}</p>
+        <p class="item-info">Cantidad: {{ item.cantidad }}</p>
         <div class="botones">
             <!-- Botón de Quitar -->
             <form method="post" action="{% url 'quitar_del_carrito' item.producto.nombreProducto %}" onsubmit="myButton.disabled = true; return true;">
@@ -45,9 +50,9 @@
     <p class="total">Total: ${{ total }}</p>
     
     <!-- Botón de Realizar Compra -->
-    <form method="post" action="{% url 'realizar_compra' %}">
+    <form method="post" action="{% url 'realizar_compra' %}" onsubmit="compraButton.disabled = true; return true;">
         {% csrf_token %}
-        <button type="submit" {% if not carrito_productos %}disabled{% endif %}>Realizar Compra</button>
+        <button type="submit" id="compraButton" {% if not carrito_productos %}disabled{% endif %}>Realizar Compra</button>
     </form>
 
     <!-- Botón de Inicio -->

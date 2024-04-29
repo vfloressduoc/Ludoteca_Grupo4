@@ -182,6 +182,8 @@ def form_del_usuario(request, id):
 
 
 #REGISTRO COMO CLIENTE (Usando 'User' de Django)
+from django.contrib.auth import authenticate, login
+
 def reg_clientes(request):
     if request.method == 'POST':
         user_form = CustomUserCreationForm(request.POST)
@@ -189,6 +191,13 @@ def reg_clientes(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             UserProfile.objects.create(user=user, avatar=profile_form.cleaned_data['avatar'], palabra_clave=profile_form.cleaned_data['palabra_clave'])
+            
+            # Autenticar al usuario y luego iniciar sesión
+            new_user = authenticate(username=user_form.cleaned_data['username'],
+                                    password=user_form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+
             return redirect('home')
         else:
             context = {'user_form': user_form, 'profile_form': profile_form}
