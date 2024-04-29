@@ -79,6 +79,7 @@ class EditarPerfilForm(UserChangeForm):
         model = User
         fields = ('username', 'email', )
 
+@login_required
 def editarperfil(request):
     if request.method == 'POST':
         form = EditarPerfilForm(request.POST, instance=request.user)
@@ -313,7 +314,7 @@ def agregar_al_carrito(request, nombre_producto):
 #PAGINA PARA VER EL CARRITO
 @login_required
 def carrito_compras(request):
-    carrito = get_object_or_404(Carrito, usuario=request.user)
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
     carrito_productos = CarritoProducto.objects.filter(carrito=carrito)
     total = sum(item.producto.precioProducto * item.cantidad for item in carrito_productos)
     return render(request, 'aplicacionweb/carrito_compras.html', {'carrito_productos': carrito_productos, 'total': total})

@@ -38,7 +38,11 @@
     </div>
     <div class="form-group">
         <label for="id_avatar">Avatar actual</label>
-        <img id="avatar" src="{{ user.userprofile.avatar.url }}" alt="Avatar actual">
+        {% if user.userprofile.avatar %}
+            <img id="avatar" src="{{ user.userprofile.avatar.url }}" alt="Avatar actual">
+        {% else %}
+            <img id="avatar" src="{% static 'Img/OIG4.jpg' %}" alt="Default avatar">
+        {% endif %}
         <label for="id_avatar">Cambiar avatar</label>
         <input type="file" id="id_avatar" name="avatar">
     </div>
