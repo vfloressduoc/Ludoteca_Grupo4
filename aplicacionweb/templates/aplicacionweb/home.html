@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludoteca Duoc</title>
 
-    <link rel="stylesheet" href="{% static '/css/website-style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/website-catalogo-style.css' %}">
 
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
     
@@ -16,7 +16,13 @@
 
 <body>
 
+        <!-- EBOTONES TEMPORALES, VACIAR CATEGORIA-PROVEEDOR Y CREAR TODO LO DE NUESTRA TABLA -->
 
+
+    <form method="post" action="{% url 'agregar_categorias' %}">
+        {% csrf_token %}
+        <button type="submit">Llenar tablas</button>
+    </form>
 
     <!-- EN ESTE CONTENEDOR VAN LOS BOTONES -->
     <div class="button-container">
@@ -36,11 +42,11 @@
     
     {% if user.is_authenticated %}
     <div>
-        <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
-        <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
-        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+        <a href="{%  url 'ordenes_compra' %}"><button>Ordenes de compra</button></a>
+        <a href="{%  url 'carrito_compras' %}"><button>Carrito</button></a>
+        <a href="{%  url 'editarperfil' %}"><button>Mi cuenta</button></a>
         <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-        <div style="margin-top: 20px; margin-left: 600px;">
+        <div style="margin-top: 20px; margin-left: 600px;"> <!-- Esta linea mueve a los lados el avatar y msj -->
             {% if user.userprofile.avatar %}
                 <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}'s avatar" style="width: 100px; height: 100px;">
             {% else %}
@@ -73,38 +79,7 @@
         </ul>
     </nav>
 
-    <!-- Array que recorre imagenes para mostrarlas por intervalo de segundos -->
-    <div class="container border-box">
-    
-        <div class="categoria"> <!-- Contenedor de la categoría -->
-            <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 1 -->
-                <img id="gameImage" src="{% static 'Img/promoenvio.png' %}" alt="envio"> <!-- Imagen de Elden Ring -->
-                <div class="card-content"> <!-- Contenido de la tarjeta -->
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-
-    <!-- ESTE SON LOS LINKS PARA VER USUARIOS Y CREARLOS -->
-    <footer>
-    <script>
-        var images = [
-            '{% static "Img/promoenvio.png" %}',
-            '{% static "Img/promojuegos.png" %}',
-            '{% static "Img/promosede.png" %}',
-            // Agrega aquí las rutas a tus imágenes
-        ];
-        var index = 0;
-        setInterval(function () {
-            var gameImage = document.getElementById('gameImage');
-            gameImage.src = images[index];
-            index = (index + 1) % images.length;
-        }, 1000);
-    </script>
-        </div>
+    <img src="{% static 'Img/Bannerinicio.png' %}" alt="Banner de inicio">
 
 
         <footer class="footer">
