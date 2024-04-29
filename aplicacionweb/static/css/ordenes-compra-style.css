@@ -1,0 +1,78 @@
+body {
+    background-image: url('/static/Img/fondowebpale.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Ajusta según sea necesario */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+}
+
+.list-group-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.list-group-item h2 {
+    margin: 0 0 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+.list-group-item p {
+    margin: 0 0 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+}
+
+.table th {
+    background-color: #cb84ef;
+    color: white;
+}
+
+.home-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.home-button {
+    background-color: #cb84ef;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #a763c5;
+}

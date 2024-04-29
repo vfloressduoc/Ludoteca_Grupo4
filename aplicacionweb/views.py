@@ -320,8 +320,8 @@ def carrito_compras(request):
 
 #QUITAR ITEM DEL CARRITO
 @login_required
-def quitar_del_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, idProducto=producto_id)
+def quitar_del_carrito(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombreProducto=nombre_producto)
     carrito = get_object_or_404(Carrito, usuario=request.user)
     carrito_producto = get_object_or_404(CarritoProducto, carrito=carrito, producto=producto)
     if carrito_producto.cantidad > 1:

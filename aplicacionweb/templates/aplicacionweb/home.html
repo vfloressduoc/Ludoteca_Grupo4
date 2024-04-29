@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludoteca Duoc</title>
 
-    <link rel="stylesheet" href="{% static '/css/website-style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/website-catalogo-style.css' %}">
 
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
     
@@ -21,7 +21,7 @@
 
     <form method="post" action="{% url 'agregar_categorias' %}">
         {% csrf_token %}
-        <button type="submit">Agregar categorías</button>
+        <button type="submit">Llenar tablas</button>
     </form>
 
     <!-- EN ESTE CONTENEDOR VAN LOS BOTONES -->
@@ -79,38 +79,7 @@
         </ul>
     </nav>
 
-    <!-- Array que recorre imagenes para mostrarlas por intervalo de segundos -->
-    <div class="container border-box">
-    
-        <div class="categoria"> <!-- Contenedor de la categoría -->
-            <div class="card-12 card-sm-6 card-md-4"> <!-- Tarjeta 1 -->
-                <img id="gameImage" src="{% static 'Img/promoenvio.png' %}" alt="envio"> <!-- Imagen de Elden Ring -->
-                <div class="card-content"> <!-- Contenido de la tarjeta -->
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
 
-
-    <!-- ESTE SON LOS LINKS PARA VER USUARIOS Y CREARLOS -->
-    <footer>
-    <script>
-        var images = [
-            '{% static "Img/promoenvio.png" %}',
-            '{% static "Img/promojuegos.png" %}',
-            '{% static "Img/promosede.png" %}',
-            // Agrega aquí las rutas a tus imágenes
-        ];
-        var index = 0;
-        setInterval(function () {
-            var gameImage = document.getElementById('gameImage');
-            gameImage.src = images[index];
-            index = (index + 1) % images.length;
-        }, 1000);
-    </script>
-        </div>
 
 
         <footer class="footer">

@@ -65,11 +65,13 @@ urlpatterns = [
     path('panel_productos/', panel_productos, name='panel_productos'),
     path('form_mod_producto/<int:id>/', views.form_mod_producto, name='form_mod_producto'),
     path('form_del_producto/<id>', form_del_producto, name='form_del_producto'),
+    
     path('agregar_al_carrito/<str:nombre_producto>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito_compras/', carrito_compras, name='carrito_compras'),
-    path('quitar_del_carrito/<int:producto_id>/', views.quitar_del_carrito, name='quitar_del_carrito'),
+    path('quitar_del_carrito/<str:nombre_producto>/', views.quitar_del_carrito, name='quitar_del_carrito'),
     path('ordenes_compra/', views.ordenes_compra, name='ordenes_compra'),
     path('realizar_compra/', views.realizar_compra, name='realizar_compra'),
+    
     path('ver_pedidos/', views.ver_pedidos, name='ver_pedidos'),
     path('ver_todos_pedidos/', views.ver_todos_pedidos, name='ver_todos_pedidos'),
     path('panel_pedidos/', views.panel_pedidos, name='panel_pedidos'),
