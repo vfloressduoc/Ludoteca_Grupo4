@@ -21,6 +21,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import SetPasswordForm
+from django.http import HttpResponseRedirect
+from .models import Categoria, Proveedor
 
 
 
@@ -397,7 +399,7 @@ class SetPasswordFormWithoutOldPassword(SetPasswordForm):
             del self.fields['old_password']
 
     def clean_old_password(self):
-        # No hacer nada en este método
+        #? No hacer nada en este método?
         pass
 
 from django.contrib.auth.decorators import login_required
@@ -417,3 +419,31 @@ def cambiar_contrasena(request, user_id):
     else:
         form = SetPasswordFormWithoutOldPassword(user)
     return render(request, 'aplicacionweb/cambiar_contrasena.html', {'form': form})
+
+
+# ** AGREGAR DATOS INICIALES A LA BBDD **
+def agregar_categorias(request):
+    if request.method == 'POST':
+        Categoria.objects.get_or_create(nombre='Familiar')
+        Categoria.objects.get_or_create(nombre='Cooperativo')
+        Categoria.objects.get_or_create(nombre='Eurogame')
+        Categoria.objects.get_or_create(nombre='Deckbuilding')
+        Categoria.objects.get_or_create(nombre='Solitarios')
+        return redirect('home')
+
+    return render(request, 'nombre_del_template.html')
+
+#! VACIAR CATEGORIA Y PROVEEDOR: no funciona **
+def vaciar_categorias_proveedores(request):
+    print("La función vaciar_categorias_proveedores ha sido llamada")
+    if request.method == 'POST':
+        Categoria.objects.all().delete()
+        Proveedor.objects.all().delete()
+        return redirect('home')
+
+    return render(request, 'home.html')
+
+
+def mostrar_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'categorias_proveedores.html', {'categorias': categorias})

@@ -76,4 +76,6 @@ urlpatterns = [
     path('borrar_pedido/<int:pedido_id>/', views.borrar_pedido, name='borrar_pedido'),
     path('recuperar_contrasena/', views.recuperar_contrasena, name='recuperar_contrasena'),
     path('cambiar_contrasena/<int:user_id>/', cambiar_contrasena, name='cambiar_contrasena'),
+    path('agregar_categorias/', views.agregar_categorias, name='agregar_categorias'),
+    path('vaciar_categorias_proveedores/', views.vaciar_categorias_proveedores, name='vaciar_categorias_proveedores'),
 ]

@@ -16,7 +16,16 @@
 
 <body>
 
+        <!-- EBOTONES TEMPORALES, VACIAR CATEGORIA-PROVEEDOR Y CREAR TODO LO DE NUESTRA TABLA -->
+    <form method="post" action="{% url 'agregar_categorias' %}">
+        {% csrf_token %}
+        <button type="submit">Agregar categorías</button>
+    </form>
 
+    <form method="post" action="{% url 'vaciar_categorias_proveedores' %}">
+        {% csrf_token %}
+        <button type="submit">Vaciar categorías y proveedores</button>
+    </form>
 
     <!-- EN ESTE CONTENEDOR VAN LOS BOTONES -->
     <div class="button-container">
@@ -40,7 +49,7 @@
         <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
         <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
         <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-        <div style="margin-top: 20px; margin-left: 600px;">
+        <div style="margin-top: 20px; margin-left: 600px;"> <!-- Esta linea mueve a los lados el avatar y msj -->
             {% if user.userprofile.avatar %}
                 <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}'s avatar" style="width: 100px; height: 100px;">
             {% else %}
