@@ -1,0 +1,84 @@
+body {
+    background-color: #121212; /* Fondo más oscuro */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #1a1a1a; /* Fondo más oscuro */
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #00be2c; /* Verde eléctrico */
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #00be2c; /* Verde eléctrico */
+    color: #ffffff;
+}
+
+.table tr:nth-child(even) {
+    background-color: #1a1a1a; /* Fondo más oscuro */
+}
+
+.table tr:nth-child(odd) {
+    background-color: #1a1a1a; /* Fondo más oscuro */
+}
+
+.table tr:hover {
+    background-color: #00ff51; /* Verde eléctrico */
+    cursor: pointer;
+}
+
+.dropdown-item, .btn {
+    background-color: #000000; /* Verde eléctrico */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover, .btn:hover {
+    background-color: #00ff51; /* Verde más claro al pasar el ratón */
+}
+
+.footer {
+    background-color: #1a1a1a; /* Fondo más oscuro */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.social-icons a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.social-icons a:hover {
+    color: #24f000; /* Verde eléctrico */
+}
+
+/* Para hacer las imágenes más grandes */
+img {
+    width: 20%; /* Ajusta este valor según tus necesidades */
+}
+
+/* Nueva regla para los enlaces de modificar y eliminar */
+.table td a {
+    color: #d9d9d9; /* Rojo */
+}
+
+.table td a:hover {
+    color: #d9d9d9; /* Rojo más claro al pasar el ratón */
+}

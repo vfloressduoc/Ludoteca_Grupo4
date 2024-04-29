@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'proyectoweb_tienda.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.oracle',
-        "NAME": '127.0.0.1:1521/orcl',
+        "NAME": '127.0.0.1:1521/oracl',
         "USER": 'c##ludoteca',
         "PASSWORD": '12345',
         "TEST": {
@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'es' #Cambie el idioma a español, para los mensajes que envia el registro de usuario,
+LANGUAGE_CODE = 'es-CL' #Cambie el idioma a español, para los mensajes que envia el registro de usuario,
 
 TIME_ZONE = 'UTC'
 

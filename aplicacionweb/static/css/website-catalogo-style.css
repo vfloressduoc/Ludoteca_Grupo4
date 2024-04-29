@@ -1,0 +1,138 @@
+body {
+    background-image: url('/static/Img/fondowebpale.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Cambiado de height a min-height */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; /* Añadido para cambiar la tipografía del cuerpo */
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+.button-container a {
+    margin-right: 20px;
+}
+
+.button-container a:last-child {
+    margin-right: 0;
+}
+
+.button-container button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #f78a9c;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+}
+
+.button-container button:last-child {
+    margin-right: 0;
+}
+
+.button-container button:hover {
+    background-color: #99d7fe;
+}
+
+.buy-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #f78a9c;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #99d7fe;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
+
+.navbar {
+    background-color: #f78a9c;
+    padding: 10px 0;
+}
+
+.navbar-list {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-item .navbar-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5em; /* Aumentado el tamaño de la fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Añadido para la transición al pasar el mouse */
+}
+
+.navbar-item .navbar-link:hover {
+    color: #fafafa;
+    transform: scale(1.1); /* Añadido para que el enlace se ilumine al pasar el mouse */
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+    margin-bottom: 50px;
+}
+
+.card-12, .card-sm-6, .card-md-4 {
+    flex: 1 0 100%;
+    margin-bottom: 30px;
+}
+
+.card-content {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5); 
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer .social-media {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+footer .social-media a {
+    color: white;
+    font-size: 2em;
+}
+
+footer .social-media a:hover {
+    color: #fafafa;
+}
+
+.rotating-images {
+    width: 400px;
+    height:300;
+    object-fit: cover;
+}

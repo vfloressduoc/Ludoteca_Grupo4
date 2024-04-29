@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludoteca Duoc</title>
 
-    <link rel="stylesheet" href="{% static '/css/forms-style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/carrito-style.css' %}">
 
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
     
@@ -26,63 +26,36 @@
         <p>Cantidad: {{ item.cantidad }}</p>
         <div class="botones">
             <!-- Botón de Quitar -->
-            <form method="post" action="{% url 'quitar_del_carrito' item.producto.idProducto %}" onsubmit="myButton.disabled = true; return true;">
+            <form method="post" action="{% url 'quitar_del_carrito' item.producto.nombreProducto %}" onsubmit="myButton.disabled = true; return true;">
                 {% csrf_token %}
                 <button type="submit" id="myButton">Quitar</button>
             </form>
             <!-- Botón de Agregar -->
-            <form method="post" action="{% url 'agregar_al_carrito' item.producto.idProducto %}" onsubmit="myButton2.disabled = true; return true;">
+            <form method="post" action="{% url 'agregar_al_carrito' item.producto.nombreProducto %}" onsubmit="myButton2.disabled = true; return true;">
                 {% csrf_token %}
                 <button type="submit" id="myButton2">Agregar</button>
             </form>
         </div>
     </div>
-{% empty %}
+    {% empty %}
     <p>No hay productos en el carrito.</p>
-{% endfor %}
-
-<p>Total: ${{ total }}</p>
-
-<!-- Botón de Realizar Compra -->
-<form method="post" action="{% url 'realizar_compra' %}">
-    {% csrf_token %}
-    <button type="submit" {% if not carrito_productos %}disabled{% endif %}>Realizar Compra</button>
-</form>
-
-
-
-
-    <div class="button-container">
-
-        {% if user.is_superuser %}
-            <a href="{%  url 'panel_moderacion' %}"><button>PANEL ADMIN</button></a>
-            <a href="{%  url 'panel_productos' %}"><button>PRODUCTOS</button></a>
-        {% endif %}
+    {% endfor %}
     
-        {% if user.is_authenticated %}
-            <div>
-                <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
-                <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
-                <h3 style="margin-left: 10px;">¡Bienvenido {{ user.username }}!</h3>
-            </div>
-        {% else %}
-            <a href="{%  url 'reg_clientes' %}"><button>Crear Cuenta</button></a>
-            <a href="{%  url 'iniciar_sesion' %}"><button>Iniciar Sesión</button></a>
-        {% endif %}
+    <!-- Total -->
+    <p class="total">Total: ${{ total }}</p>
+    
+    <!-- Botón de Realizar Compra -->
+    <form method="post" action="{% url 'realizar_compra' %}">
+        {% csrf_token %}
+        <button type="submit" {% if not carrito_productos %}disabled{% endif %}>Realizar Compra</button>
+    </form>
+
+    <!-- Botón de Inicio -->
+    <div class="boton-inicio-container">
+        <a href="{%  url 'home' %}" class="navbar-link boton-inicio"><i class="fas fa-home"></i> Inicio</a>
     </div>
 
-
-
-
-
-
-
-
-
 </body>
-
-<li class="navbar-item"><a href="{%  url 'home' %}" class="navbar-link"><i class="fas fa-home"></i> Inicio</a></li>
-
 
 {% comment %} <footer class="footer">
     <p>@Todos los derechos reservados</p>

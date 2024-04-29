@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/static/Img/fondowebpale.png');
+}
+
+h3 {
+    color: #333;
+    text-align: center;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#form {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 3px solid #ddd; /* Aumenta este valor para un borde más ancho */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #666;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.btn {
+    color: #fff;
+    background-color: #ff69b4; /* color rosa */
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ff1493; /* color rosa oscuro al pasar el ratón */
+}
+
+.alert {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 90%; /* Reducir el ancho del campo de texto */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+}
