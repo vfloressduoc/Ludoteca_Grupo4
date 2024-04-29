@@ -1,141 +1,74 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+    background-color: #121212;
+    color: #98FB98;
+    font-family: Arial, sans-serif;
 }
 
-body {
-    color: #b9b9b9; 
-    background-color: rgb(22, 22, 22);
-    background-size: cover;
-    background-repeat: repeat;
-    font-family: Arial, sans-serif; 
-    text-align: center; 
-    position: relative;
+h3 {
+    color: #98FB98;
+}
+
+.row {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-}
-
-img{
-    width: 280px;
-    height: 280px;
-    margin: 30px;
-    border-radius: 30px;    
-}
-
-table {
-    border-collapse: collapse;
-    margin-top: 15px; /* Añade un margen superior a la tabla */
-}
-
-table, th, td {
-    border: 1px solid white;
-    padding: 15px; /* Ajusta este valor según tus necesidades */
-}
-
-.border-box {
-    box-sizing: border-box;
-}
-
-.footer {
-    background-color: rgb(22, 22, 22);
-    color: rgb(214, 232, 240);
     padding: 20px;
-    text-align: center;
-    margin-top: auto;
 }
 
-.social-icons a {
-    margin: 0 10px;
-    color: rgb(214, 232, 240);
-    text-decoration: none;
+#form {
+    background-color: #232323;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-img{
-    width: 280px;
-    height: 280px;
-    margin: 30px;
-    border-radius: 30px;    
+.form-group {
+    margin-bottom: 15px;
 }
 
-/*Esto es para los href (links)*/
-a:link, a:visited {
-    color: white; /* Cambia el color de los enlaces a blanco */
-    text-decoration: none;
+.form-group label {
+    display: block;
+    color: #98FB98;
 }
 
-a:hover {
-    color: rgb(137, 255, 192); /* Cambia el color de los enlaces a rojo cuando pasas el ratón por encima */
-}
-
-.social-icons a:link, .social-icons a:visited {
-    margin: 0 10px;
-    color: rgb(255, 255, 255); /* Cambia el color de los enlaces a rojo */
-    text-decoration: none;
-}
-
-.social-icons a:hover {
-    color: rgb(137, 255, 192); /* Cambia el color de los enlaces a verde cuando pasas el ratón por encima */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #353535;
+    color: #98FB98;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    color: rgb(219, 219, 219);
-    background-color: #050505;
+    color: #98FB98;
+    background-color: #232323;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
-    margin: 10px; /* Añade un margen alrededor de cada botón */
+    font-size: 16px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #353535;
 }
 
-/*Esto es para los href (links)*/
-.dropdown-item, .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    color: rgb(219, 219, 219);
-    background-color: #050505;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    margin-right: 10px; /* Añade un margen a la derecha de cada botón */
+.alert {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 4px;
 }
 
-.dropdown-item:hover, .btn:hover {
-    background-color: #0056b3;
+.alert-danger {
+    background-color: #8B0000;
+    color: #FFFFFF;
 }
 
-
-#form .form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-#form .form-group label {
-    margin-top: 10px;
-}
-
-#form .form-group input, 
-#form .form-group select, 
-#form .form-group textarea {
-    margin-top: 5px;
-}
-
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-}
-
-.image-preview {
-    width: 50px; /* Ajusta el ancho a tu gusto */
-    height: 50px; /* Ajusta la altura a tu gusto */
+.alert-success {
+    background-color: #006400;
+    color: #FFFFFF;
 }

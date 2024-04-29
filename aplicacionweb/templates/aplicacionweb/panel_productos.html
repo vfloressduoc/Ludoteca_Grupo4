@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/paneladm-style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/paneladmin-ver-style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
@@ -61,9 +61,9 @@
     
 {% endblock contenido %}
 
-<div style="display: flex; justify-content: space-between; margin-top: 20px;">
-    <a class="dropdown-item" href="{%  url 'panel_create_productos' %}"><i class="fas fa-user"></i> Agregar producto</a>
-    <a href="{% url 'categorias_proveedores' %}" class="btn"><i class="fas fa-list"></i> Ver Categorías y Proveedores</a>
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <a class="dropdown-item" style="margin-bottom: 10px;" href="{%  url 'panel_create_productos' %}"><i class="fas fa-user"></i> Agregar producto</a>
+    <a href="{% url 'categorias_proveedores' %}" style="margin-bottom: 10px;" class="btn"><i class="fas fa-list"></i> Ver Categorías y Proveedores</a>
     <a href="{% url 'home' %}" class="btn"><i class="fas fa-home"></i> Regresar a HOME</a>
 </div>
 

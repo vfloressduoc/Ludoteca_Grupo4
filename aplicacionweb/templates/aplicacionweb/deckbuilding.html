@@ -33,9 +33,9 @@
     
     {% if user.is_authenticated %}
     <div>
-        <a href="{%  url 'ordenes_compra' %}"><button>Mis compras</button></a>
-        <a href="{%  url 'carrito_compras' %}"><button>Carrito de compra</button></a>
-        <a href="{%  url 'editarperfil' %}"><button>Editar Cuenta</button></a>
+        <a href="{%  url 'ordenes_compra' %}"><button>Ordenes de compra</button></a>
+        <a href="{%  url 'carrito_compras' %}"><button>Carrito</button></a>
+        <a href="{%  url 'editarperfil' %}"><button>Mi cuenta</button></a>
         <a href="{% url 'cerrar_sesion' %}"><button>Cerrar sesión</button></a>
         <div style="margin-top: 20px; margin-left: 600px;"> <!-- Esta linea mueve a los lados el avatar y msj -->
             {% if user.userprofile.avatar %}
@@ -85,10 +85,12 @@
                             <p>{{ producto.descripcionProducto }}</p>
                             <p class="precio">Precio: ${{ producto.precioProducto }}</p>
                             <!-- Botón de Comprar -->
-                            <form method="post" action="{% url 'agregar_al_carrito' producto.nombreProducto %}" onsubmit="myButton.disabled = true; return true;">
-                                {% csrf_token %}
-                                <button type="submit" id="myButton" class="buy-button">Comprar</button>
-                            </form>
+                            {% if user.is_authenticated %}
+                                <form method="post" action="{% url 'agregar_al_carrito' producto.nombreProducto %}" onsubmit="myButton.disabled = true; return true;">
+                                    {% csrf_token %}
+                                    <button type="submit" id="myButton" class="buy-button">Comprar</button>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -97,24 +99,26 @@
 
         <!-- Producto: Hero Realms-->
         {% for producto in productos %}
-        {% if producto.nombreProducto == "Hero Realms" %}
-            <div class="categoria">
-                <div class="card-12 card-sm-6 card-md-4">
-                    <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
-                    <div class="card-content">
-                        <h2>{{ producto.nombreProducto }}</h2>
-                        <p>{{ producto.descripcionProducto }}</p>
-                        <p class="precio">Precio: ${{ producto.precioProducto }}</p>
-                        <!-- Botón de Comprar -->
+    {% if producto.nombreProducto == "Hero Realms" %}
+        <div class="categoria">
+            <div class="card-12 card-sm-6 card-md-4">
+                <img src="{{ producto.imagenProducto.url }}" alt="{{ producto.nombreProducto }}">
+                <div class="card-content">
+                    <h2>{{ producto.nombreProducto }}</h2>
+                    <p>{{ producto.descripcionProducto }}</p>
+                    <p class="precio">Precio: ${{ producto.precioProducto }}</p>
+                    <!-- Botón de Comprar -->
+                    {% if user.is_authenticated %}
                         <form method="post" action="{% url 'agregar_al_carrito' producto.nombreProducto %}" onsubmit="myButton.disabled = true; return true;">
                             {% csrf_token %}
                             <button type="submit" id="myButton" class="buy-button">Comprar</button>
                         </form>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
-        {% endif %}
-    {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
         </div>
     </div> 
 
