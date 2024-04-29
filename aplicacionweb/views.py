@@ -301,8 +301,8 @@ def form_del_producto(request, id):
 #!Si no estas logeado y das al carrito se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados", por el mmento solo lo pueden ver registrado pero no se si pueden entrar via "/direccion"
 #!Si no tienes elementos en el carrito y estas logeado se cae al hacer clic en el
 @login_required
-def agregar_al_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, idProducto=producto_id)
+def agregar_al_carrito(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombreProducto=nombre_producto)
     carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
     carrito_producto, creado = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
     if not creado:
@@ -424,26 +424,65 @@ def cambiar_contrasena(request, user_id):
 # ** AGREGAR DATOS INICIALES A LA BBDD **
 def agregar_categorias(request):
     if request.method == 'POST':
-        Categoria.objects.get_or_create(nombre='Familiar')
-        Categoria.objects.get_or_create(nombre='Cooperativo')
-        Categoria.objects.get_or_create(nombre='Eurogame')
-        Categoria.objects.get_or_create(nombre='Deckbuilding')
-        Categoria.objects.get_or_create(nombre='Solitarios')
+        categoria_familiar, _ = Categoria.objects.get_or_create(nombre='Familiar')
+        categoria_cooperativo, _ = Categoria.objects.get_or_create(nombre='Cooperativo')
+        categoria_eurogame, _ = Categoria.objects.get_or_create(nombre='Eurogame')
+        categoria_deckbuilding, _ = Categoria.objects.get_or_create(nombre='Deckbuilding')
+        categoria_solitarios, _ = Categoria.objects.get_or_create(nombre='Solitarios')
+
+        proveedor_nacional, _ = Proveedor.objects.get_or_create(tipo='Nacional')
+        proveedor_extranjero, _ = Proveedor.objects.get_or_create(tipo='Extranjero')
+
+        descripcion_dixit = 'Libellud | Dixit Classic | Juego de Mesa de Imaginación y Creatividad Ganador de Varios Premios| A Partir de 8 Años | De 3 a 8 Jugadores | 30 Minutos por Partida | En Español'
+        Producto.objects.get_or_create(nombreProducto='Dixit', precioProducto=25000, descripcionProducto=descripcion_dixit, imagenProducto='productos/dixit-producto.png', categoria=categoria_familiar, proveedor=proveedor_nacional)
+
+        descripcion_arkham = 'Secretos de la Orden | Juego de Mesa | -6 Jugadores | A Partir de 14 años | 2-3 Horas de Tiempo de Juego'
+        Producto.objects.get_or_create(nombreProducto='Arkham Horror 3* Edición', precioProducto=35000, descripcionProducto=descripcion_arkham, imagenProducto='productos/arkhamhorror-producto.png', categoria=categoria_cooperativo, proveedor=proveedor_extranjero)
+
+        descripcion_7wonders = 'Juego de Cartas en Español Recomendado a Partir de 10 Años de Edad Juego de 3 a 7 Jugadores Con una duración de 30 Minutos por partida Apto para personas con daltonismo.'
+        Producto.objects.get_or_create(nombreProducto='7 Wonders Nueva Edición', precioProducto=45000, descripcionProducto=descripcion_7wonders, imagenProducto='productos/7wonders-producto.png', categoria=categoria_familiar, proveedor=proveedor_nacional)
+
+        descripcion_pandemic = 'Z-Man Games | Pandemic | Juego de Mesa Cooperativo para Adultos y Familias | A Partir de 8 Años | De 2 a 4 Jugadores | 45 Minutos por Partida | Español'
+        Producto.objects.get_or_create(nombreProducto='Pandemic', precioProducto=20000, descripcionProducto=descripcion_pandemic, imagenProducto='productos/pandemic-producto.png', categoria=categoria_cooperativo, proveedor=proveedor_nacional)
+
+        descripcion_brass = 'Roxley Games- Brass Latón: Birmingham, colores variados (ROX402) , color/modelo surtido'
+        Producto.objects.get_or_create(nombreProducto='Brass Birmingham', precioProducto=100000, descripcionProducto=descripcion_brass, imagenProducto='productos/brass-producto.png', categoria=categoria_eurogame, proveedor=proveedor_extranjero)
+
+        descripcion_dune = 'Asmodee - Dune: Imperium, Juego de Mesa, 1-4 Jugadores, 13+ Años, Edición en Italiano'
+        Producto.objects.get_or_create(nombreProducto='Dune Imperium', precioProducto=45000, descripcionProducto=descripcion_dune, imagenProducto='productos/dune-producto.png', categoria=categoria_eurogame, proveedor=proveedor_extranjero)
+
+        descripcion_marvel = 'El juego de Cartas | Juego de Estrategia y Superhéroes Cooperativo | A Partir de 14 Años | De 1 a 4 Jugadores | 45-90 Minutos por Partida | Español'
+        Producto.objects.get_or_create(nombreProducto='Marvel Champions', precioProducto=55000, descripcionProducto=descripcion_marvel, imagenProducto='productos/marvelchampions-producto.png', categoria=categoria_deckbuilding, proveedor=proveedor_extranjero)
+
+        descripcion_hero = 'Devir - Hero Realms, Juego de Cartas 12 años, Fácil y Divertido (BGHR)'
+        Producto.objects.get_or_create(nombreProducto='Hero Realms', precioProducto=18000, descripcionProducto=descripcion_hero, imagenProducto='productos/herorealms-producto.png', categoria=categoria_deckbuilding, proveedor=proveedor_extranjero)
+
+        descripcion_7continent = 'Core Box 2nd Edition - Juego básico de iniciación (versión inglesa)'
+        Producto.objects.get_or_create(nombreProducto='The 7th Continent (Inglés)', precioProducto=80000, descripcionProducto=descripcion_7continent, imagenProducto='productos/7continent-producto.png', categoria=categoria_solitarios, proveedor=proveedor_extranjero)
+        
+        descripcion_viernes = 'Edge Studio | Viernes | Juego de Cartas de Estrategia para un Solo Jugador | A Partir de 10 Años | Juego en solitario | 30 Minutos por Partida |'
+        Producto.objects.get_or_create(nombreProducto='Viernes', precioProducto=20000, descripcionProducto=descripcion_viernes, imagenProducto='productos/viernes-producto.png', categoria=categoria_solitarios, proveedor=proveedor_nacional)
         return redirect('home')
 
     return render(request, 'nombre_del_template.html')
 
-#! VACIAR CATEGORIA Y PROVEEDOR: no funciona **
-def vaciar_categorias_proveedores(request):
-    print("La función vaciar_categorias_proveedores ha sido llamada")
-    if request.method == 'POST':
-        Categoria.objects.all().delete()
-        Proveedor.objects.all().delete()
-        return redirect('home')
-
-    return render(request, 'home.html')
 
 
-def mostrar_categorias(request):
+#** VER CATEGORIAS
+def categorias_proveedores(request):
     categorias = Categoria.objects.all()
-    return render(request, 'categorias_proveedores.html', {'categorias': categorias})
+    proveedores = Proveedor.objects.all()  
+    return render(request, 'aplicacionweb/categorias_proveedores.html', {'categorias': categorias, 'proveedores': proveedores})
+
+# BORRAR CATEGORIA
+
+def borrar_proveedor(request, id):
+    proveedor = Proveedor.objects.get(id=id)  
+    proveedor.delete()
+    return redirect('categorias_proveedores')
+
+
+def borrar_categoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+    categoria.delete()
+    return redirect('categorias_proveedores')

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludoteca Duoc</title>
+
+    <link rel="stylesheet" href="{% static '/css/panelformularios-adm.css' %}">
+
+    <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
+    
+</head>
+
+<body>
+<html>
+<head>
+    <title>Ver y borrar Categorías y Proveedores</title>
+</head>
+<body>
+    <h1>Categorías</h1>
+    <ul>
+        {% for categoria in categorias %}
+            <li>
+                {{ categoria.nombre }}
+                <a href="{% url 'borrar_categoria' categoria.id %}">Borrar</a>
+            </li>
+        {% empty %}
+            <li>No hay categorías.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+<h1>Proveedores</h1>
+<ul>
+    {% for proveedor in proveedores %}
+        <li>
+            {{ proveedor.tipo }}
+            <a href="{% url 'borrar_proveedor' proveedor.id %}">Borrar</a>
+        </li>
+    {% empty %}
+        <li>No hay proveedores.</li>
+    {% endfor %}
+</ul>
+
+
+</body>
+
+<li class="navbar-item"><a href="{%  url 'home' %}" class="navbar-link"><i class="fas fa-home"></i> Inicio</a></li>
+
+
+{% comment %} <footer class="footer">
+    <p>@Todos los derechos reservados</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/DuocUC/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/DuocUC"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/duocuc_cl/"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer> {% endcomment %}
+
+</html>

@@ -17,14 +17,11 @@
 <body>
 
         <!-- EBOTONES TEMPORALES, VACIAR CATEGORIA-PROVEEDOR Y CREAR TODO LO DE NUESTRA TABLA -->
+
+
     <form method="post" action="{% url 'agregar_categorias' %}">
         {% csrf_token %}
         <button type="submit">Agregar categorías</button>
-    </form>
-
-    <form method="post" action="{% url 'vaciar_categorias_proveedores' %}">
-        {% csrf_token %}
-        <button type="submit">Vaciar categorías y proveedores</button>
     </form>
 
     <!-- EN ESTE CONTENEDOR VAN LOS BOTONES -->
