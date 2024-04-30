@@ -461,7 +461,6 @@ def agregar_categorias(request):
     return render(request, 'home.html')
 
 
-
 #** VER CATEGORIAS
 def categorias_proveedores(request):
     categorias = Categoria.objects.all()
@@ -485,3 +484,4 @@ def borrar_categoria(request, id):
 
 def playlist_view(request):
     return render(request, 'home.html')
+
