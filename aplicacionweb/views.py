@@ -29,8 +29,6 @@ from .models import Categoria, Proveedor
 # Create your views here.
 
 #VISTAS GENERALES
-#? En algun momento se rompio el CSS de nuestra web o yo veo los colores distintos? 
-#! Intento cambiar algo en el css de home porque veo los colores de fondo diferentes y las cosas se desalinean y no me responde. Arreglar diseños
 def home(request):
     return render(request, 'aplicacionweb/home.html')
 
@@ -38,22 +36,18 @@ def cooperativo(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/cooperativo.html', {'productos': productos})
 
-#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def deckbuilding(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/deckbuilding.html', {'productos': productos})
 
-#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def eurogames(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/eurogames.html', {'productos': productos})
 
-#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def familiar(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/familiar.html', {'productos': productos})
 
-#! El footer (parte inferior redes sociales) de la pagina se sobrepone al boton comprar del segundo producto, tuve que desactivarlo por ahora 
 def solitarios(request):
     productos = Producto.objects.all()
     return render(request, 'aplicacionweb/solitarios.html', {'productos': productos})
@@ -68,8 +62,6 @@ def recuperarcontrasena(request):
     return render(request, 'aplicacionweb/recuperarcontrasena.html')
 
 #*DEFINICION DE CLASES (COMO SE VERÁ LA PAGINA)
-#TODO Organizar las clases de acuerdo a la estructura de la pagina web, quitar las que no esten en uso.
-#TODO Cambiar el nombre de las clases a algo mas descriptivo, ej: 'form_usuario' a 'form_create_usuario'.
 
 #USUARIO
 #EDITAR DATOS DE UN USUARIO EXISTENTE (Usando 'User' de Django)
@@ -209,7 +201,6 @@ def reg_clientes(request):
         return render(request, 'aplicacionweb/reg_clientes.html', context)
 
 #INICIO DE SESION
-#! Feedback: Al ingresar un usuario incorrecto y posteriormente una contraseña incorrecta, persiste el mensaje "usuario incorrecto" y viseversa, se debe limpiar
 def iniciar_sesion(request):
     if request.method == 'POST':
         username = request.POST['user']
@@ -252,9 +243,6 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
-# RECUPERACION DE CONTRASEÑA
-#TODO Pendiente de implementar la 'recuperacion de contraseña'
-
 # ***** MANIPULAR PRODUCTOS CRUD *****
 
 
@@ -269,7 +257,6 @@ def panel_productos(request):
     return render(request, 'aplicacionweb/panel_productos.html', context)
 
 #** CREAR PRODUCTOS
-#TODO Feedback: Solicita un proveedor y una categoria que no aparecen, debemos cambiarlo en models. el tipo de datos a Char para ingresar dato (pendiente a que podria romper algo mas) o intentar que automaticamente inyecte esas categorias.
 def panel_create_productos(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -308,8 +295,6 @@ def form_del_producto(request, id):
 #CARRITO DE COMPRAS
 
 #DEF PARA AGREGAR ITEM A CARRITO (Se usa tanto para el boton comprar como para aumentar la cantidad de un item en el carrito)
-#!Si no estas logeado y das al carrito se cae la web, debe solo enviar un mensaje para que se logee "Solo usuarios registrados", por el mmento solo lo pueden ver registrado pero no se si pueden entrar via "/direccion"
-#!Si no tienes elementos en el carrito y estas logeado se cae al hacer clic en el
 @login_required
 def agregar_al_carrito(request, nombre_producto):
     producto = get_object_or_404(Producto, nombreProducto=nombre_producto)
@@ -360,7 +345,6 @@ def realizar_compra(request):
     carrito.carritoproducto_set.all().delete()
     return redirect('ordenes_compra')
 
-#! "@login_required" antes del def es para que personas logeadas solamente puedan usarlo, pero algunas def no me permitian anteponerlo, no reconocia la def si lo hacia.
 #VER PEDIDOS REALIZADOS
 def ver_pedidos(request):
     pedidos = Pedido.objects.filter(usuario=request.user)
@@ -431,7 +415,7 @@ def cambiar_contrasena(request, user_id):
     return render(request, 'aplicacionweb/cambiar_contrasena.html', {'form': form})
 
 
-# ** AGREGAR DATOS INICIALES A LA BBDD **
+# ** AGREGAR DATOS INICIALES A LA BBDD: Esto cargo las 5 categorias, 2 proveedores y los productos que se ven en las pantallas **
 def agregar_categorias(request):
     if request.method == 'POST':
         categoria_familiar, _ = Categoria.objects.get_or_create(nombre='Familiar')
