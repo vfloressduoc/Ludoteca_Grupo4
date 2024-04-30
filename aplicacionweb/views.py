@@ -496,3 +496,8 @@ def borrar_categoria(request, id):
     categoria = Categoria.objects.get(id=id)
     categoria.delete()
     return redirect('categorias_proveedores')
+
+#vista para traer playlist al home.
+
+def playlist_view(request):
+    return render(request, 'home.html')
