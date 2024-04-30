@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroGames - Free To Play</title>
-    <link rel="stylesheet" href="{% static '/css/panelformularios-adm.css' %}">
+    <link rel="stylesheet" href="{% static '/css/paneladm-style.css' %}">
     <script src="https://kit.fontawesome.com/25ac30d53f.js"></script>
 
 </head>
@@ -32,7 +32,7 @@
                     <p class="card-text">Productos:</p>
                     <ul class="mb-3">
                         {% for productopedido in pedido.pedidoproducto_set.all %}
-                            <li>{{ productopedido.producto.nombre }} - Cantidad: {{ productopedido.cantidad }}</li>
+                        <li>{{ productopedido.producto.nombreProducto }} - Cantidad: {{ productopedido.cantidad }}</li>
                         {% endfor %}
                     </ul>
                 </div>
