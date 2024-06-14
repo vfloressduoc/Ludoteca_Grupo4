@@ -1,0 +1,47 @@
+TRUNCATE TABLE APLICACIONWEB_PRODUCTO;
+TRUNCATE TABLE APLICACIONWEB_CATEGORIA;
+TRUNCATE TABLE APLICACIONWEB_PROVEEDOR;
+
+
+-- Insertar datos en la tabla Categoria
+INSERT INTO APLICACIONWEB_CATEGORIA (nombre) VALUES ('Familiar');
+INSERT INTO APLICACIONWEB_CATEGORIA (nombre) VALUES ('Cooperativo');
+INSERT INTO APLICACIONWEB_CATEGORIA (nombre) VALUES ('Eurogame');
+INSERT INTO APLICACIONWEB_CATEGORIA (nombre) VALUES ('Deckbuilding');
+INSERT INTO APLICACIONWEB_CATEGORIA (nombre) VALUES ('Solitario');
+
+-- Insertar datos en la tabla Proveedor
+INSERT INTO APLICACIONWEB_PROVEEDOR (tipo) VALUES ('Nacional');
+INSERT INTO APLICACIONWEB_PROVEEDOR (tipo) VALUES ('Extranjero');
+
+
+-- Insertar datos en la tabla Producto
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('7 Wonders Nueva Edición', 45000, 'Juego de Cartas en Español Recomendado a Partir de 10 Años de Edad Juego de 3 a 7 Jugadores Con una duración de 30 Minutos por partida Apto para personas con daltonismo.', 'productos/7wonders.png', 1, 1);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Dixit', 25000, 'Libellud | Dixit Classic | Juego de Mesa de Imaginación y Creatividad Ganador de Varios Premios| A Partir de 8 Años | De 3 a 8 Jugadores | 30 Minutos por Partida | En Español', 'productos/dixit.png', 1, 1);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Arkham Horror 3* Edición', 35000, 'Secretos de la Orden | Juego de Mesa | 1-6 Jugadores | A Partir de 14 años | 2-3 Horas de Tiempo de Juego', 'productos/arkham.png', 2, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Pandemic', 20000, 'Z-Man Games | Pandemic | Juego de Mesa Cooperativo para Adultos y Familias | A Partir de 8 Años | De 2 a 4 Jugadores | 45 Minutos por Partida | Español', 'productos/pandemic.png', 2, 1);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Brass Birmingham', 100000, 'Roxley Games- Brass Latón: Birmingham, colores variados (ROX402) , color/modelo surtido', 'productos/brass.png', 3, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Dune Imperium', 45000, 'Asmodee - Dune: Imperium, Juego de Mesa, 1-4 Jugadores, 13+ Años, Edición en Italiano', 'productos/dune.png', 3, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Marvel Champions', 55000, 'El juego de Cartas | Juego de Estrategia y Superhéroes Cooperativo | A Partir de 14 Años | De 1 a 4 Jugadores | 45-90 Minutos por Partida | Español', 'productos/marvelchampions.png', 4, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Hero Realms', 18000, 'Devir - Hero Realms, Juego de Cartas 12 años, Fácil y Divertido (BGHR)', 'productos/herorealms.png', 4, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('The 7th Continent (Inglés)', 80000, 'Core Box 2nd Edition - Juego básico de iniciación (versión inglesa)', 'productos/7thcontinent.png', 5, 2);
+
+INSERT INTO APLICACIONWEB_PRODUCTO (nombreProducto, precioProducto, descripcionProducto, imagenProducto, categoria_id, proveedor_id)
+VALUES ('Viernes', 20000, 'Descripcion: Edge Studio | Viernes | Juego de Cartas de Estrategia para un Solo Jugador | A Partir de 10 Años | Juego en solitario | 30 Minutos por Partida |', 'productos/viernes.png', 5, 2);

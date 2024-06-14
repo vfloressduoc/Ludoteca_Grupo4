@@ -56,6 +56,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'proyectoweb_tienda.urls'
 
+#el template "context_processors" aca abajo es para poder enviar variables globales a los distintos templates de la aplicacion.
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
